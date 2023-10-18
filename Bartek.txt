@@ -1,4 +1,4 @@
 Czesc to jest moja linia.
 a to jest moja druga linia.
-trzecie linia
-4linijka
+trzecia linia.
+czwarta linia BArtek.
