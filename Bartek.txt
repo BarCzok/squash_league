@@ -1,4 +1,4 @@
-Czesc to jest moja linia.
+Pierwsza linia 2.
 a to jest moja druga linia.
 trzecia linia.
 czwarta linia BArtek.
