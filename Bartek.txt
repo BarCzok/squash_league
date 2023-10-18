@@ -1,2 +1,3 @@
 Czesc to jest moja linia.
 a to jest moja druga linia.
+trzecia linia.
