@@ -1,4 +1,5 @@
 Pierwsza linia 2.
 a to jest moja druga linia.
 trzecia linia.
-czwarta linia BArtek.
+czwarta linia Bartek.
+kolejna linijka dodana przez Wojtka.
