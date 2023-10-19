@@ -1,10 +1,10 @@
-package com.squash1.squash1;
+package com.praktyki.squash;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Squash1ApplicationTests {
+class SquashApplicationTests {
 
     @Test
     void contextLoads() {

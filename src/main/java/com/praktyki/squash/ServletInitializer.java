@@ -1,4 +1,4 @@
-package com.squash1.squash1;
+package com.praktyki.squash;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Squash1Application.class);
+        return application.sources(SquashApplication.class);
     }
 
 }
