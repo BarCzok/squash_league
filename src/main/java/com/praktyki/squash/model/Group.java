@@ -1,18 +1,19 @@
 package com.praktyki.squash.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "zawodnicy")
-public class Player {
+@Table(name = "grupy")
+public class Group {
     @Id
     @GeneratedValue
     private int id;
 
     private String name;
 
-    @ManyToOne
-    private Group group;
+    @OneToMany
+    private Set<Player> players;
 
     public int getId() {
         return id;
@@ -28,5 +29,13 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
     }
 }
