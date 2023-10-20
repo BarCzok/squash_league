@@ -15,13 +15,18 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>pl.sda</groupId>
-    <artifactId>quizy</artifactId>
+    <groupId>com.praktyki.squash</groupId>
+    <artifactId>squash</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>quizy</name>
-    <description>Quizy na każdą okazję</description>
+    <name>squash</name>
+    <description>Liga squasha</description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

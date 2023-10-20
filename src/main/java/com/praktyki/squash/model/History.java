@@ -2,13 +2,14 @@ package com.praktyki.squash.model;
 
 
 import javax.persistence.*;
-import java.util.Set;
 import javax.persistence.Entity;
 
 @Entity
 @Table(name ="historia")
 public class History {
 
+    @Id
+    private int id;
     @ManyToOne
     private Player player;
 

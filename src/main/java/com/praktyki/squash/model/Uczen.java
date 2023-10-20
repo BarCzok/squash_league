@@ -1,32 +1,33 @@
 package com.praktyki.squash.model;
 
-import javax.persistence.*;
 
+import javax.persistence.*;
 @Entity
-@Table(name = "zawodnicy")
-public class Player {
+@Table(name = "uczen")
+public class Uczen {
+
     @Id
     @GeneratedValue
     private int id;
 
     private String name;
 
-    @OneToMany
-    private History history;
-
-    public int getId() {
-        return id;
-    }
+    @ManyToOne
+    private Klasa klasa;
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }
