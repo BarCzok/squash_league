@@ -6,6 +6,7 @@ import com.praktyki.squash.repository.UczenRepository;
 import com.praktyki.squash.repository.KlasaRepository;
 import org.springframework.stereotype.Component;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -38,6 +39,13 @@ public class TestUczenData {
         Klasa klasa2 = new Klasa();
         klasa2.setNrSali(22);
         klasaRepository.save(klasa2);
+
+        uczen1.setKlasa(klasa1);
+        uczen2.setKlasa(klasa1);
+
+        uczen3.setKlasa(klasa2);
+
+        uczenRepository.saveAll(List.of(uczen1, uczen2, uczen3));
     }
 
     public void readTestData(){
@@ -48,7 +56,7 @@ public class TestUczenData {
         while(iteratorUczen.hasNext()){
             Uczen uczen = iteratorUczen.next();
 
-            System.out.println(uczen.getName() + " " + uczen.getId());
+            System.out.println(uczen.getName() + " " + uczen.getId() + " nr sali: " + uczen.getKlasa().getNrSali());
             }
         }
 

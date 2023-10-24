@@ -1,6 +1,8 @@
 package com.praktyki.squash.model;
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "uczen")

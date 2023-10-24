@@ -1,5 +1,7 @@
 package com.praktyki.squash.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class Klasa {
     private int id;
     private int nrSali;
 
-    @OneToMany
+    @OneToMany(mappedBy = "klasa")
     private List<Uczen> uczniowie;
 
     public int getId() {
