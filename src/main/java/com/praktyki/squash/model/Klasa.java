@@ -19,6 +19,22 @@ public class Klasa {
         return id;
     }
 
+    public int getNrSali() {
+        return nrSali;
+    }
+
+    public void setNrSali(int nrSali) {
+        this.nrSali = nrSali;
+    }
+
+    public void setUczniowie(List<Uczen> uczniowie) {
+        this.uczniowie = uczniowie;
+    }
+
+    public List<Uczen> getUczniowie() {
+        return uczniowie;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
