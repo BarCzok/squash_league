@@ -1,9 +1,12 @@
 package com.praktyki.squash.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "zawodnicy")
+@Table(name = "players")
 public class Player {
     @Id
     @GeneratedValue
@@ -11,22 +14,11 @@ public class Player {
 
     private String name;
 
-    @OneToMany
-    private History history;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
