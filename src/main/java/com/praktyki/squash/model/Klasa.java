@@ -1,6 +1,8 @@
 package com.praktyki.squash.model;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "klasa")
 public class Klasa {
@@ -8,10 +10,10 @@ public class Klasa {
     @Id
     @GeneratedValue
     private int id;
+    private int nrSali;
 
-    private String list;
-
-
+    @OneToMany
+    private List<Uczen> uczniowie;
 
     public int getId() {
         return id;
@@ -21,11 +23,4 @@ public class Klasa {
         this.id = id;
     }
 
-    public void setList(String list) {
-        this.list = list;
-    }
-
-    public String getList() {
-        return list;
-    }
 }
