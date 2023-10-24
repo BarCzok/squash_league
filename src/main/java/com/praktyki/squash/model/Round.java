@@ -15,8 +15,6 @@ public class Round {
 
     private String name;
 
-    @OneToMany
-    private History history;
 
     public int getId() {
         return id;

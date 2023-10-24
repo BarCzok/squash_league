@@ -11,8 +11,7 @@ public class Klasa {
 
     private String list;
 
-    @OneToMany
-    private Uczen uczen;
+
 
     public int getId() {
         return id;
@@ -26,19 +25,7 @@ public class Klasa {
         this.list = list;
     }
 
-    public void setUczen(Uczen uczen) {
-        this.uczen = uczen;
-    }
-
     public String getList() {
         return list;
     }
-
-    public Uczen getUczen() {
-        return uczen;
-    }
-
-
-
-
 }

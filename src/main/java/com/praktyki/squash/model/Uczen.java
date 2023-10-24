@@ -12,9 +12,6 @@ public class Uczen {
 
     private String name;
 
-    @ManyToOne
-    private Klasa klasa;
-
     public void setId(int id) {
         this.id = id;
     }

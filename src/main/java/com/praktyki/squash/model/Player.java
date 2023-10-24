@@ -11,9 +11,6 @@ public class Player {
 
     private String name;
 
-    @OneToMany
-    private History history;
-
     public int getId() {
         return id;
     }
