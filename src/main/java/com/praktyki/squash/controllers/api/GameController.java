@@ -1,4 +1,4 @@
-package com.praktyki.squash.controllers;
+package com.praktyki.squash.controllers.api;
 
 import com.praktyki.squash.facades.GameFacade;
 import com.praktyki.squash.facades.dto.GameDTO;
@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/games")
+@RestController(value = "apiGameController")
+@RequestMapping(value = "/api/games")
 public class GameController {
 
     @Resource
     GameFacade gameFacade;
-
 
     @GetMapping
     public List<GameDTO> getGames(){
