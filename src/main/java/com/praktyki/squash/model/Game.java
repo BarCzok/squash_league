@@ -1,5 +1,7 @@
 package com.praktyki.squash.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Game {
     @ManyToOne
     private Player player2;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
     private List<Score> scores;
 
     public void setPlayer1(Player player1) {

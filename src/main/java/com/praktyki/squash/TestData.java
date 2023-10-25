@@ -16,7 +16,7 @@ import java.util.Random;
 @Component
 public class TestData {
 
-    int playersCount = 6;
+    int playersCount = 2;
     private List<Player> players = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
 

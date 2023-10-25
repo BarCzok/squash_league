@@ -1,7 +1,5 @@
 package com.praktyki.squash.model;
 
-import com.praktyki.squash.dto.PlayerDTO;
-
 import javax.persistence.*;
 
 @Entity
