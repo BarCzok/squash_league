@@ -18,6 +18,7 @@ public class SquashApplication implements WebMvcConfigurer {
         testData.createPlayers();
         testData.createGames();
         testData.createScores();
+        testData.createGroupss();
 
         GameFacade gameFacade = context.getBean(GameFacade.class);
         System.out.println(gameFacade.getGames());

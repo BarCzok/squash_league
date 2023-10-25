@@ -3,9 +3,11 @@ package com.praktyki.squash;
 import com.praktyki.squash.model.Game;
 import com.praktyki.squash.model.Player;
 import com.praktyki.squash.model.Score;
+import com.praktyki.squash.model.Groupss;
 import com.praktyki.squash.repository.GameRepository;
 import com.praktyki.squash.repository.PlayersRepository;
 import com.praktyki.squash.repository.ScoreRepository;
+import com.praktyki.squash.repository.GroupssRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,8 +31,11 @@ public class TestData {
     @Resource
     ScoreRepository scoreRepository;
 
+    @Resource
+    GroupssRepository groupssRepository;
+
     public void createPlayers() {
-        for(int i=0; i<playersCount; i++){
+        for (int i = 0; i < playersCount; i++) {
             Player player = new Player();
             player.setName("Player" + i);
             players.add(player);
@@ -38,6 +43,14 @@ public class TestData {
 
         playersRepository.saveAll(players);
     }
+
+    public void createGroupss() {
+        Groupss groupss = new Groupss();
+        groupss.setName("A");
+        groupss.add(groupss);
+
+        groupssRepository.save(groupss);
+}
 
     public void createGames() {
         for(int i=0; i<players.size(); i++){
