@@ -1,6 +1,7 @@
 package com.praktyki.squash;
 
 import com.praktyki.squash.facades.GameFacade;
+import com.praktyki.squash.facades.GroupFacade;
 import com.praktyki.squash.facades.PlayerFacade;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,5 +23,7 @@ public class SquashApplication implements WebMvcConfigurer {
 
         GameFacade gameFacade = context.getBean(GameFacade.class);
         System.out.println(gameFacade.getGames());
+
+        context.getBean(GroupFacade.class).getGroupss();
     }
 }
