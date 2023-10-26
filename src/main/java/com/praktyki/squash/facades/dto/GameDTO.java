@@ -10,6 +10,8 @@ public class GameDTO {
 
     List<ScoreDTO> score;
 
+    List<ScoreDTO> pointsForWining;
+
     public int getId() {
         return id;
     }
@@ -41,6 +43,7 @@ public class GameDTO {
     public void setScore(List<ScoreDTO> score) {
         this.score = score;
     }
+
 
     @Override
     public String toString() {

@@ -2,7 +2,7 @@ package com.praktyki.squash.facades.dto;
 
 public class ScoreDTO {
     int sets;
-    int points;
+    int pointsForSets;
     int pointsForWinning;
     int pointsForPlaying;
     PlayerDTO player;
@@ -15,12 +15,12 @@ public class ScoreDTO {
         this.sets = sets;
     }
 
-    public int getPoints() {
-        return points;
+    public int getPointsForSets() {
+        return pointsForSets;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setPointsForSets(int pointsForSets) {
+        this.pointsForSets = pointsForSets;
     }
 
     public int getPointsForWinning() {
@@ -51,7 +51,7 @@ public class ScoreDTO {
     public String toString() {
         return "ScoreDTO{" +
                 "sets=" + sets +
-                ", points=" + points +
+                ", points=" + pointsForSets +
                 ", pointsForWinning=" + pointsForWinning +
                 ", pointsForPlaying=" + pointsForPlaying +
                 ", player=" + player +

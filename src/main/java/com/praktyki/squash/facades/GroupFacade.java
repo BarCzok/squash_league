@@ -21,12 +21,12 @@ public class GroupFacade {
 
         return (List<GroupDTO>) convertGroupss(groupss);
     }
-    private GroupDTO convertGroupss(Iterable<Groupss> groupss) {
+    private List<GroupDTO> convertGroupss(Iterable<Groupss> groupss) {
         List<GroupDTO> groupDtos = new ArrayList<>();
 
         groupss.forEach(x -> groupDtos.add(convertGroupss(x)));
 
-        return (GroupDTO) groupDtos;
+        return groupDtos;
     }
 
     public GroupDTO convertGroupss(Groupss groupss) {

@@ -35,7 +35,7 @@ public class ScoreFacade {
 
         scoreDto.setSets(score.getSets());
         scoreDto.setPointsForPlaying(2);
-        scoreDto.setPoints(score.getSets()*2);
+        scoreDto.setPointsForSets(score.getSets()*2);
         scoreDto.setPlayer(playerFacade.convertPlayer(score.getPlayer()));
 
         return scoreDto;

@@ -10,6 +10,8 @@ public class Score {
     private int id;
     private int sets;
 
+    private int points;
+
     @ManyToOne
     private Game game;
 
@@ -38,5 +40,13 @@ public class Score {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

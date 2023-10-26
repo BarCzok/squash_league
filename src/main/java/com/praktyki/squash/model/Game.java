@@ -21,6 +21,8 @@ public class Game {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
     private List<Score> scores;
 
+
+
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
@@ -44,4 +46,6 @@ public class Game {
     public void setScores(List<Score> scores) {
         this.scores = scores;
     }
+
+
 }

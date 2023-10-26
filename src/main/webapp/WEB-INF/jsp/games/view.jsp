@@ -14,12 +14,15 @@
         <td>Player1</td>
         <td>Player2</td>
         <td>Score</td>
+        <td>SetPoints</td>
+        
     </thead>
     <c:forEach var="game" items="${games}">
         <tr>
             <td>${game.score[0].player.name}</td>
             <td>${game.score[1].player.name}</td>
             <td>${game.score[0].sets}:${game.score[1].sets}</td>
+            <td>${game.score[0]. pointsForSets}:${game.score[1]. pointsForSets}</td>
         </tr>
     </c:forEach>
 </table>
