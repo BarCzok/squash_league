@@ -13,6 +13,8 @@ public class Player {
 
     private String name;
 
+    private int numerTelefonu;
+
     public void setName(String name) {
         this.name = name;
     }
@@ -27,5 +29,13 @@ public class Player {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getNumerTelefonu() {
+        return numerTelefonu;
+    }
+
+    public void setNumerTelefonu(int numerTelefonu) {
+        this.numerTelefonu = numerTelefonu;
     }
 }

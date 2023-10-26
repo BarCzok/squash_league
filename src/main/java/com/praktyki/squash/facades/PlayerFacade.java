@@ -15,6 +15,10 @@ public class PlayerFacade {
     @Resource
     private PlayersRepository playersRepository;
 
+    public PlayerDTO getPlayer(int playerId){
+        return convertPlayer(playersRepository.findById(playerId).get());
+    }
+
     public List<PlayerDTO> getPlayers(){
         Iterable<Player> players = playersRepository.findAll();
 
