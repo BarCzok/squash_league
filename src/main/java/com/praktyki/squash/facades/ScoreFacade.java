@@ -27,6 +27,7 @@ public class ScoreFacade {
             score2.setPointsForWinning(2);
         }
 
+
         return List.of(score1, score2);
     }
 

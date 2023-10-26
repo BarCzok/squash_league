@@ -5,6 +5,28 @@ public class ScoreDTO {
     int pointsForSets;
     int pointsForWinning;
     int pointsForPlaying;
+    int totalPoints;
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    @Override
+    public String toString() {
+        return "ScoreDTO{" +
+                "sets=" + sets +
+                ", pointsForSets=" + pointsForSets +
+                ", pointsForWinning=" + pointsForWinning +
+                ", pointsForPlaying=" + pointsForPlaying +
+                ", totalPoints=" + totalPoints +
+                ", player=" + player +
+                '}';
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
     PlayerDTO player;
 
     public int getSets() {
@@ -47,14 +69,4 @@ public class ScoreDTO {
         this.player = player;
     }
 
-    @Override
-    public String toString() {
-        return "ScoreDTO{" +
-                "sets=" + sets +
-                ", points=" + pointsForSets +
-                ", pointsForWinning=" + pointsForWinning +
-                ", pointsForPlaying=" + pointsForPlaying +
-                ", player=" + player +
-                '}';
-    }
 }

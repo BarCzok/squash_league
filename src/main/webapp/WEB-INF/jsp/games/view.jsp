@@ -15,14 +15,23 @@
         <td>Player2</td>
         <td>Score</td>
         <td>SetPoints</td>
-        
+        <td>WinPoints</td>
+        <td>PlayPoints</td>
+        <td>TotalPoints</td>
     </thead>
     <c:forEach var="game" items="${games}">
+        <c:set var="score1" value="${game.score[0]}"/>
+        <c:set var="score2" value="${game.score[1]}"/>
         <tr>
-            <td>${game.score[0].player.name}</td>
-            <td>${game.score[1].player.name}</td>
-            <td>${game.score[0].sets}:${game.score[1].sets}</td>
-            <td>${game.score[0]. pointsForSets}:${game.score[1]. pointsForSets}</td>
+            <td>${score1.player.name}</td>
+            <td>${score2.player.name}</td>
+            <td>${score1.sets}:${score2.sets}</td>
+            <td>${score1.pointsForSets}:${score2.pointsForSets}</td>
+            <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>
+            <td>${score1.pointsForPlaying}:${score2.pointsForPlaying}</td>
+            <td>${score1.pointsForSets + score1.pointsForWinning + score1.pointsForPlaying}:
+                    ${score2.pointsForSets + score2.pointsForWinning + score2.pointsForPlaying}</td>
+
         </tr>
     </c:forEach>
 </table>
