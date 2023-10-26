@@ -26,7 +26,8 @@ public class ScoreFacade {
             score1.setPointsForWinning(0);
             score2.setPointsForWinning(2);
         }
-
+        score1.setTotalPoints(score1.getPointsForWinning() + score1.getPointsForPlaying() + score1.getPointsForSets() );
+        score2.setTotalPoints(score2.getPointsForWinning() + score2.getPointsForPlaying() + score2.getPointsForSets());
 
         return List.of(score1, score2);
     }
