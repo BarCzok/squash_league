@@ -8,7 +8,7 @@ public class GameDTO {
     PlayerDTO player1;
     PlayerDTO player2;
 
-    List<ScoreDTO> score;
+    List<ScoreDTO> scores;
 
     List<ScoreDTO> pointsForWining;
 
@@ -36,12 +36,12 @@ public class GameDTO {
         this.player2 = player2;
     }
 
-    public List<ScoreDTO> getScore() {
-        return score;
+    public List<ScoreDTO> getScores() {
+        return scores;
     }
 
-    public void setScore(List<ScoreDTO> score) {
-        this.score = score;
+    public void setScores(List<ScoreDTO> scores) {
+        this.scores = scores;
     }
 
 
@@ -51,7 +51,7 @@ public class GameDTO {
                 "id=" + id +
                 ", player1=" + player1 +
                 ", player2=" + player2 +
-                ", score=" + score +
+                ", score=" + scores +
                 '}';
     }
 }

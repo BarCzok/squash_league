@@ -50,7 +50,7 @@
 
     <table>
         <colgroup>
-            <col span="2" style="background-color: D6EEEE">
+            <col span="2" style="background-color: #D6EEEE">
         </colgroup>
         <thead>
         <td>Player1</td>
@@ -62,18 +62,24 @@
         <td>TotalPoints</td>
         </thead>
         <c:forEach var="game" items="${games}">
-            <c:set var="score1" value="${game.score[0]}"/>
-            <c:set var="score2" value="${game.score[1]}"/>
-            <tr>
-                <td><a href="/players/${score1.player.id}">${score1.player.name}</a></td>
-                <td><a href="/players/${score2.player.id}">${score2.player.name}</a></td>
-                <td>${score1.sets}:${score2.sets}</td>
-                <td>${score1.pointsForSets}:${score2.pointsForSets}</td>
-                <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>
-                <td>${score1.pointsForPlaying}:${score2.pointsForPlaying}</td>
-                <td>${score1.totalPoints}:${score2.totalPoints}</td>
+            <c:if test="${game.scores.size() ne 0}">
 
-            </tr>
+                <c:set var="score1" value="${game.scores[0]}"/>
+                <c:set var="score2" value="${game.scores[1]}"/>
+
+                <tr>
+                    <td><a href="/players/${score1.player.id}">${score1.player.name}</a></td>
+                    <td><a href="/players/${score2.player.id}">${score2.player.name}</a></td>
+                    <td>${score1.sets}:${score2.sets}</td>
+                    <td>${score1.pointsForSets}:${score2.pointsForSets}</td>
+                    <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>
+                    <td>${score1.pointsForPlaying}:${score2.pointsForPlaying}</td>
+                    <td>${score1.totalPoints}:${score2.totalPoints}</td>
+                </tr>
+            </c:if>
+            <c:if test="${game.scores.size() eq 0}">
+                <a href="">Podaj wynik</a>
+            </c:if>
         </c:forEach>
     </table>
 

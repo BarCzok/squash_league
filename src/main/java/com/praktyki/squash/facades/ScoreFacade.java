@@ -5,6 +5,7 @@ import com.praktyki.squash.model.Score;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -15,6 +16,10 @@ public class ScoreFacade {
 
 
     public List<ScoreDTO> convertScores(List<Score> scores) {
+        if(scores.isEmpty()){
+            return new ArrayList<>();
+        }
+
         ScoreDTO score1 = convertScore(scores.get(0));
         ScoreDTO score2 = convertScore(scores.get(1));
 

@@ -41,7 +41,7 @@ public class GameFacade {
         gameDTO.setPlayer1(playerFacade.convertPlayer(game.getPlayer1()));
         gameDTO.setPlayer2(playerFacade.convertPlayer(game.getPlayer2()));
 
-        gameDTO.setScore(scoreFacade.convertScores(game.getScores()));
+        gameDTO.setScores(scoreFacade.convertScores(game.getScores()));
 
         return gameDTO;
     }
