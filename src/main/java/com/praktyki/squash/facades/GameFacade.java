@@ -38,11 +38,16 @@ public class GameFacade {
     private GameDTO convertGame(Game game) {
         GameDTO gameDTO = new GameDTO();
 
+        gameDTO.setId(game.getId());
         gameDTO.setPlayer1(playerFacade.convertPlayer(game.getPlayer1()));
         gameDTO.setPlayer2(playerFacade.convertPlayer(game.getPlayer2()));
 
         gameDTO.setScores(scoreFacade.convertScores(game.getScores()));
 
         return gameDTO;
+    }
+
+    public GameDTO getGame(Integer gameId) {
+        return convertGame(gameRepository.findById(gameId).get());
     }
 }
