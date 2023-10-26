@@ -13,7 +13,8 @@ public class Player {
 
     private String name;
 
-    private int numerTelefonu;
+    private int phoneNumber;
+    private String adress;
 
     public void setName(String name) {
         this.name = name;
@@ -31,11 +32,19 @@ public class Player {
         this.id = id;
     }
 
-    public int getNumerTelefonu() {
-        return numerTelefonu;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumerTelefonu(int numerTelefonu) {
-        this.numerTelefonu = numerTelefonu;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }

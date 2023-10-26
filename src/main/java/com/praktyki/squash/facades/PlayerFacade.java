@@ -38,6 +38,8 @@ public class PlayerFacade {
 
         playerDto.setId(player.getId());
         playerDto.setName(player.getName());
+        playerDto.setPhoneNumber(player.getPhoneNumber());
+        playerDto.setAdress(player.getAdress());
 
         return playerDto;
     }

@@ -38,6 +38,8 @@ public class TestData {
         for (int i = 0; i < playersCount; i++) {
             Player player = new Player();
             player.setName("Player" + i);
+            player.setPhoneNumber(837349531 + i);
+            player.setAdress("Rybnik Domowa "+ 10 + i);
             players.add(player);
         }
 

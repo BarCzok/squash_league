@@ -3,6 +3,8 @@ package com.praktyki.squash.facades.dto;
 public class PlayerDTO {
     int id;
     String name;
+    int phoneNumber;
+    String adress;
 
     public int getId() {
         return id;
@@ -20,11 +22,29 @@ public class PlayerDTO {
         this.name = name;
     }
 
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
     @Override
     public String toString() {
         return "PlayerDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", adress='" + adress + '\'' +
                 '}';
     }
 }

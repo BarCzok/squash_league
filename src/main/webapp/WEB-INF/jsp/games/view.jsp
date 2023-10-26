@@ -5,7 +5,12 @@
 
 <html>
 <head>
+    <title>Tabela Games</title>
     <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -28,7 +33,7 @@
         td:nth-child(even) {
             background-color: #D6EEEE;
         }
-        tr:hover {background-color: #ddd;}
+
 
         .div{
             display: flex;
