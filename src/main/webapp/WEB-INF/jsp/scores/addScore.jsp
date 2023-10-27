@@ -12,9 +12,9 @@
 <c:set var="score2" value="${game.scores[1]}"/>
 
 <form:form action="/scores/addScore" method="post" modelAttribute="score">
-    <form:label path="points1">${score.player1Name} sets:</form:label>
+    <form:label path="points1">player${score.player1Id} sets:</form:label>
     <form:input path="points1"/><br/>
-    <form:label path="points2">${score.player2Name} sets:</form:label>
+    <form:label path="points2">player${score.player2Id} sets:</form:label>
     <form:input path="points2"/><br/>
 
     <form:button>Add score</form:button>
