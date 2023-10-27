@@ -1,14 +1,13 @@
 package com.praktyki.squash.controllers.view;
 
+import com.praktyki.squash.controllers.forms.ScoreForm;
 import com.praktyki.squash.facades.GameFacade;
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.model.Game;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -19,12 +18,19 @@ public class ScoreController {
     @Resource
     GameFacade gameFacade;
 
-    @GetMapping(value = "addScore/{gameId}")
-    public String addScore(@PathVariable Integer gameId, ModelMap model){
+    @GetMapping(value = "score/{gameId}")
+    public String score(@PathVariable Integer gameId, ModelMap model){
 
         GameDTO gameDto = gameFacade.getGame(gameId);
         model.addAttribute("game", gameDto);
+        model.addAttribute("score", new ScoreForm());
 
         return "scores/addScore";
+    }
+    @PostMapping(value = "/addScore")
+    public String addScore(@ModelAttribute ScoreForm score){
+//        scoreFacade.addScore(score);
+
+        return "redirect:/games/view";
     }
 }

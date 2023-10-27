@@ -74,7 +74,7 @@
                             ${score1.sets}:${score2.sets}
                         </c:if>
                         <c:if test="${game.scores.size() eq 0}">
-                            <a href="/scores/addScore/${game.id}">Podaj</a>
+                            <a href="/scores/score/${game.id}">Podaj</a>
                         </c:if>
                     </td>
                     <td>${score1.pointsForSets}:${score2.pointsForSets}</td>
