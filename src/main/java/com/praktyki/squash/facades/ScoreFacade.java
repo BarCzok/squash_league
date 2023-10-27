@@ -1,5 +1,6 @@
 package com.praktyki.squash.facades;
 
+import com.praktyki.squash.controllers.forms.ScoreForm;
 import com.praktyki.squash.facades.dto.ScoreDTO;
 import com.praktyki.squash.model.Score;
 import org.springframework.stereotype.Component;
@@ -47,4 +48,7 @@ public class ScoreFacade {
 
         return scoreDto;
     }
+
+
+
 }
