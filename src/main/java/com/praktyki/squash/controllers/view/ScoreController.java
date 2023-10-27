@@ -23,8 +23,8 @@ public class ScoreController {
         GameDTO gameDto = gameFacade.getGame(gameId);
 
         ScoreForm scoreForm = new ScoreForm();
-        scoreForm.setPlayer1Name(gameDto.getPlayer1().getName());
-        scoreForm.setPlayer2Name(gameDto.getPlayer2().getName());
+        scoreForm.setPlayer1Id(gameDto.getPlayer1().getId());
+        scoreForm.setPlayer2Id(gameDto.getPlayer2().getId());
 
         model.addAttribute("game", gameDto);
         model.addAttribute("score",scoreForm );
