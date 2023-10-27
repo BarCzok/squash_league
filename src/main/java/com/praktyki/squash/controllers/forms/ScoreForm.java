@@ -65,11 +65,5 @@ public class ScoreForm {
         this.points2 = points2;
     }
 
-    public int getGameId() {
-        return gameId;
-    }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
 }

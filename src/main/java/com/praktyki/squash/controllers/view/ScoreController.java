@@ -41,13 +41,21 @@ public class ScoreController {
         scoreForm.setPlayer1Id(gameDto.getPlayer1().getId());
         scoreForm.setPlayer2Id(gameDto.getPlayer2().getId());
 
-        model.addAttribute("game", gameDto);
+        scoreForm.setGameId(gameDto.getId());
+
         model.addAttribute("score",scoreForm );
 
         return "scores/addScore";
     }
     @PostMapping(value = "/addScore")
-    public String addScore(@ModelAttribute ScoreForm scoreForm){
+    public String addScore(@ModelAttribute ScoreForm scoreForm, ModelMap model){
+
+        if(scoreForm.getPoints1() + scoreForm.getPoints2() != 5){
+            model.addAttribute("score",scoreForm );
+            model.addAttribute("errorMsg","Incorrect data" );
+
+            return "scores/addScore";
+        }
 
         Score player1Score = new Score();
         player1Score.setSets(scoreForm.getPoints1());
