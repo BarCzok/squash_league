@@ -20,10 +20,14 @@ public class ScoreController {
 
     @GetMapping(value = "score/{gameId}")
     public String score(@PathVariable Integer gameId, ModelMap model){
-
         GameDTO gameDto = gameFacade.getGame(gameId);
+
+        ScoreForm scoreForm = new ScoreForm();
+        scoreForm.setPlayer1Name(gameDto.getPlayer1().getName());
+        scoreForm.setPlayer2Name(gameDto.getPlayer2().getName());
+
         model.addAttribute("game", gameDto);
-        model.addAttribute("score", new ScoreForm());
+        model.addAttribute("score",scoreForm );
 
         return "scores/addScore";
     }
