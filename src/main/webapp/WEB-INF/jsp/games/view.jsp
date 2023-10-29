@@ -19,8 +19,8 @@
         }
 
         body{
+            font-family: Tahoma, sans-serif;
             display: flex;
-
             justify-content: center;
         }
 
