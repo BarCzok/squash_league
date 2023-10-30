@@ -4,10 +4,8 @@ import com.praktyki.squash.model.Game;
 import com.praktyki.squash.model.Player;
 import com.praktyki.squash.model.Score;
 import com.praktyki.squash.model.Groupss;
-import com.praktyki.squash.repository.GameRepository;
-import com.praktyki.squash.repository.PlayersRepository;
-import com.praktyki.squash.repository.ScoreRepository;
-import com.praktyki.squash.repository.GroupssRepository;
+import com.praktyki.squash.model.Round;
+import com.praktyki.squash.repository.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -34,6 +32,9 @@ public class TestData {
     @Resource
     GroupssRepository groupssRepository;
 
+    @Resource
+    RoundRepository roundRepository;
+
     public void createPlayers() {
         for (int i = 0; i < playersCount; i++) {
             Player player = new Player();
@@ -44,6 +45,14 @@ public class TestData {
         }
 
         playersRepository.saveAll(players);
+    }
+
+    public void createRound(){
+        Round round = new Round();
+        round.setName("Pazdziernik 2023");
+        round.add(round);
+
+        roundRepository.save(round);
     }
 
     public void createGroupss() {
