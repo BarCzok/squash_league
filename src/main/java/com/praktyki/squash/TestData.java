@@ -13,8 +13,9 @@ import java.util.Random;
 public class TestData {
 
     int roundsCount = 2;
-    int groupsCount = 2;
-    int playersCount = 6;
+
+    int groupsCount = 3;
+    int playersCount = 9;
     private List<Player> players = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
     private List<Round> rounds = new ArrayList<>();
@@ -73,14 +74,14 @@ public class TestData {
         groupsRepository.saveAll(groups);
 }
 
-    public void createGames() {
+    public void createGames(Round round) {
         for(int i=0; i<players.size(); i++){
             for(int j=0; j<players.size(); j++){
                 if(i>j){
                     Game game = new Game();
                     game.setPlayer1(players.get(i));
                     game.setPlayer2(players.get(j));
-                    game.setRound(rounds.get(0));
+                    game.setRound(round);
                     games.add(game);
                 }
             }
@@ -119,5 +120,9 @@ public class TestData {
             g++;
             r++;
         }
+    }
+
+    public void createGames() {
+        rounds.forEach(this::createGames);
     }
 }
