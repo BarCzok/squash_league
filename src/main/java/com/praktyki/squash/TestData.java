@@ -1,10 +1,6 @@
 package com.praktyki.squash;
 
-import com.praktyki.squash.model.Game;
-import com.praktyki.squash.model.Player;
-import com.praktyki.squash.model.Score;
-import com.praktyki.squash.model.Groupss;
-import com.praktyki.squash.model.Round;
+import com.praktyki.squash.model.*;
 import com.praktyki.squash.repository.*;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +12,12 @@ import java.util.Random;
 @Component
 public class TestData {
 
-    int playersCount = 6;
+    int roundsCount = 3;
+    int playersCount = 2;
     private List<Player> players = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
+    private List<Round> rounds = new ArrayList<>();
+    private List<History> histories = new ArrayList<>();
 
     @Resource
     PlayersRepository playersRepository;
@@ -48,11 +47,13 @@ public class TestData {
     }
 
     public void createRound(){
-        Round round = new Round();
-        round.setName("Pazdziernik 2023");
-        round.add(round);
+        for (int i =0; i < roundsCount ; i++) {
+            Round round = new Round();
+            round.setName("Runda "+ i);
+            rounds.add(round);
+        }
 
-        roundRepository.save(round);
+        roundRepository.saveAll(rounds);
     }
 
     public void createGroupss() {

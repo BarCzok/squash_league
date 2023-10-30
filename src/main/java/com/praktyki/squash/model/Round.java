@@ -1,9 +1,7 @@
 package com.praktyki.squash.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -15,6 +13,9 @@ public class Round {
     private int id;
 
     private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "round")
+    private List<History> histories;
 
     public int getId() {
         return id;
@@ -32,6 +33,4 @@ public class Round {
         this.name = name;
     }
 
-    public void add(Round round) {
-    }
 }

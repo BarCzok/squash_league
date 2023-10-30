@@ -8,37 +8,15 @@ public class History {
     @Id
     @GeneratedValue
     private int id;
-    private int playerId;
-     private int groupId;
-     private int roundId;
 
     @ManyToOne
     private Player player;
 
     @ManyToOne
-    private Groupss group;
-
-
+    private Groupss groupp;
 
     @ManyToOne
     private Round round;
-
-
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
 
     public Player getPlayer() {
         return player;
@@ -48,12 +26,12 @@ public class History {
         this.player = player;
     }
 
-    public Groupss getGroup() {
-        return group;
+    public Groupss getGroupp() {
+        return groupp;
     }
 
-    public void setGroup(Groupss group) {
-        this.group = group;
+    public void setGroupp(Groupss group) {
+        this.groupp = group;
     }
 
     public void setId(int id) {
@@ -63,11 +41,6 @@ public class History {
     public int getId() {
         return id;
     }
-
-    public int getRoundId() {
-        return roundId;
-    }
-
     public Round getRound() {
         return round;
     }
@@ -76,7 +49,4 @@ public class History {
         this.round = round;
     }
 
-    public void setRoundId(int roundId) {
-        this.roundId = roundId;
-    }
 }

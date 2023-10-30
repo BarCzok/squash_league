@@ -22,7 +22,6 @@ public class Game {
     private List<Score> scores;
 
 
-
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }

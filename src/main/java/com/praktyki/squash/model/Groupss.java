@@ -1,13 +1,10 @@
 package com.praktyki.squash.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
-
-    @Entity
+@Entity
     @Table(name = "groupss")
     public class Groupss {
         @Id
@@ -15,6 +12,9 @@ import javax.persistence.Table;
         private int id;
 
         private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupp")
+    private List<History> history;
 
         public int getId() {
             return id;

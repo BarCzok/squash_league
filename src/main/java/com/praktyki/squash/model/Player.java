@@ -1,8 +1,6 @@
 package com.praktyki.squash.model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -15,6 +13,9 @@ public class Player {
 
     private int phoneNumber;
     private String adress;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "player")
+    private List<History> histories;
 
     public void setName(String name) {
         this.name = name;
