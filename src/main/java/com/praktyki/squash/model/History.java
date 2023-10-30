@@ -5,9 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "history")
 public class History {
-     private int playerId;
+    @Id
+    @GeneratedValue
+    private int id;
+    private int playerId;
      private int groupId;
-//     private int roundId;
+     private int roundId;
 
     @ManyToOne
     private Player player;
@@ -15,12 +18,10 @@ public class History {
     @ManyToOne
     private Groupss group;
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
-//    @ManyToOne
-//    private Round roundId;
+
+    @ManyToOne
+    private Round round;
 
 
     public int getPlayerId() {
@@ -55,23 +56,27 @@ public class History {
         this.group = group;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-//    public int getRoundId() {
-//        return roundId;
-//    }
-//
-//    public void setRoundId(Round roundId) {
-//        this.roundId = roundId;
-//    }
-//
-//    public void setRoundId(int roundId) {
-//        this.roundId = roundId;
-//    }
+    public int getRoundId() {
+        return roundId;
+    }
+
+    public Round getRound() {
+        return round;
+    }
+
+    public void setRound(Round round) {
+        this.round = round;
+    }
+
+    public void setRoundId(int roundId) {
+        this.roundId = roundId;
+    }
 }
