@@ -1,5 +1,8 @@
 package com.praktyki.squash.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,10 +14,9 @@ public class Round {
     @Id
     @GeneratedValue
     private int id;
-
     private String name;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "round")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "round")
     private List<History> histories;
 
     public int getId() {

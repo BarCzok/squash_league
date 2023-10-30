@@ -1,4 +1,7 @@
 package com.praktyki.squash.model;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,8 +16,8 @@ public class Player {
 
     private int phoneNumber;
     private String adress;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "player")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "player")
     private List<History> histories;
 
     public void setName(String name) {

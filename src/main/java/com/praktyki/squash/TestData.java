@@ -12,11 +12,14 @@ import java.util.Random;
 @Component
 public class TestData {
 
-    int roundsCount = 3;
-    int playersCount = 2;
+    int roundsCount = 1;
+
+    int groupsCount = 2;
+    int playersCount = 6;
     private List<Player> players = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
     private List<Round> rounds = new ArrayList<>();
+    private List<Groupss> groups = new ArrayList<>();
     private List<History> histories = new ArrayList<>();
 
     @Resource
@@ -29,10 +32,12 @@ public class TestData {
     ScoreRepository scoreRepository;
 
     @Resource
-    GroupssRepository groupssRepository;
+    GroupssRepository groupsRepository;
 
     @Resource
     RoundRepository roundRepository;
+    @Resource
+    HistoryRepository historyRepository;
 
     public void createPlayers() {
         for (int i = 0; i < playersCount; i++) {
@@ -57,11 +62,16 @@ public class TestData {
     }
 
     public void createGroupss() {
-        Groupss groupss = new Groupss();
-        groupss.setName("A");
-        groupss.add(groupss);
 
-        groupssRepository.save(groupss);
+        for(int i=0; i<groupsCount;i++) {
+            Groupss group = new Groupss();
+            group.setName("Grupa" + i);
+            group.add(group);
+
+            groups.add(group);
+        }
+
+        groupsRepository.saveAll(groups);
 }
 
     public void createGames() {
@@ -95,6 +105,19 @@ public class TestData {
             player2Score.setGame(game);
             player2Score.setPlayer(game.getPlayer2());
             scoreRepository.save(player2Score);
+        }
+    }
+    public void createHistories() {
+        int g = 0;
+        int r = 0;
+        for (Player player : players) {
+            History history = new History();
+            history.setPlayer(player);
+            history.setGroupp(groups.get(g%groupsCount));
+            history.setRound(rounds.get(r%roundsCount));
+            historyRepository.save(history);
+            g++;
+            r++;
         }
     }
 }

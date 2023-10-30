@@ -1,5 +1,8 @@
 package com.praktyki.squash.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,8 +15,8 @@ import java.util.List;
         private int id;
 
         private String name;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupp")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "groupp")
     private List<History> history;
 
         public int getId() {
