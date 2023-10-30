@@ -1,7 +1,9 @@
 package com.praktyki.squash.model;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "history")
 public class History {
      private int playerId;
      private int groupId;
@@ -12,6 +14,10 @@ public class History {
 
     @ManyToOne
     private Groupss group;
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
 //    @ManyToOne
 //    private Round roundId;
@@ -47,6 +53,14 @@ public class History {
 
     public void setGroup(Groupss group) {
         this.group = group;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
 //    public int getRoundId() {
