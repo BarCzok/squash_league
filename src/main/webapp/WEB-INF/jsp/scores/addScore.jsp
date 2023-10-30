@@ -48,9 +48,9 @@
     <h1>Add Game</h1><br/>
 
 <form:form action="/scores/addScore" method="post" modelAttribute="score">
-    <form:label path="points1">player${score.player1Id} sets:</form:label><br/>
+    <form:label path="points1">Player${score.player1Id} sets:</form:label><br/>
     <form:input path="points1"/><br/>
-    <form:label path="points2">player${score.player2Id} sets:</form:label><br/>
+    <form:label path="points2">Player${score.player2Id} sets:</form:label><br/>
     <form:input path="points2"/><br/>
     <c:if test="${not empty errorMsg}">
         <b style="color:#FF0000">${errorMsg}</b>

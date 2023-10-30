@@ -12,8 +12,7 @@ import java.util.Random;
 @Component
 public class TestData {
 
-    int roundsCount = 1;
-
+    int roundsCount = 2;
     int groupsCount = 2;
     int playersCount = 6;
     private List<Player> players = new ArrayList<>();

@@ -1,3 +1,5 @@
+<%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.GameDTO>"--%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -60,6 +62,7 @@
         <td>WinPoints</td>
         <td>PlayPoints</td>
         <td>TotalPoints</td>
+        <td>Round</td>
         </thead>
         <c:forEach var="game" items="${games}">
 
@@ -81,9 +84,9 @@
                     <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>
                     <td>${score1.pointsForPlaying}:${score2.pointsForPlaying}</td>
                     <td>${score1.totalPoints}:${score2.totalPoints}</td>
+                    <td><a href="/rounds/view/${game.round.id}">${game.round.name}</a></td>
+
                 </tr>
-
-
         </c:forEach>
     </table>
 
