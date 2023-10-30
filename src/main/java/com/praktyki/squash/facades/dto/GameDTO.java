@@ -12,6 +12,16 @@ public class GameDTO {
 
     List<ScoreDTO> pointsForWining;
 
+    public RoundDTO getRound() {
+        return round;
+    }
+
+    public void setRound(RoundDTO round) {
+        this.round = round;
+    }
+
+    RoundDTO round;
+
     public int getId() {
         return id;
     }

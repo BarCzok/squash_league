@@ -81,6 +81,7 @@ public class TestData {
                     Game game = new Game();
                     game.setPlayer1(players.get(i));
                     game.setPlayer2(players.get(j));
+                    game.setRound(rounds.get(0));
                     games.add(game);
                 }
             }

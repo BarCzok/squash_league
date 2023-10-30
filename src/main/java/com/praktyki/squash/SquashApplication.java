@@ -17,12 +17,11 @@ public class SquashApplication implements WebMvcConfigurer {
         TestData testData = context.getBean(TestData.class);
 
         testData.createPlayers();
-        testData.createGames();
-//        testData.createScores();
         testData.createGroupss();
         testData.createRound();
         testData.createHistories();
 
-
+        testData.createGames();
+//        testData.createScores();
     }
 }

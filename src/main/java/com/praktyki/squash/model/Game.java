@@ -57,4 +57,12 @@ public class Game {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Round getRound() {
+        return round;
+    }
+
+    public void setRound(Round round) {
+        this.round = round;
+    }
 }

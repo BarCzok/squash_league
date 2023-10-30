@@ -21,13 +21,16 @@ public class GameFacade {
     @Resource
     private ScoreFacade scoreFacade;
 
+    @Resource
+    private RoundFacade roundFacade;
+
     public List<GameDTO> getGames(){
         Iterable<Game> games = gameRepository.findAll();
 
         return convertGames(games);
     }
 
-    private List<GameDTO> convertGames(Iterable<Game> games) {
+    public List<GameDTO> convertGames(Iterable<Game> games) {
         List<GameDTO> gameDtos = new ArrayList<>();
 
         games.forEach(game -> gameDtos.add(convertGame(game)));
@@ -43,6 +46,7 @@ public class GameFacade {
         gameDTO.setPlayer2(playerFacade.convertPlayer(game.getPlayer2()));
 
         gameDTO.setScores(scoreFacade.convertScores(game.getScores()));
+        gameDTO.setRound(roundFacade.convertRound(game.getRound()));
 
         return gameDTO;
     }

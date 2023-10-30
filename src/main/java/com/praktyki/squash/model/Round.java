@@ -38,4 +38,12 @@ public class Round {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
 }

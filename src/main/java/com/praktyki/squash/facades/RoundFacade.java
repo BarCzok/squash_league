@@ -1,5 +1,6 @@
 package com.praktyki.squash.facades;
 
+import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
 import com.praktyki.squash.model.Round;
 import com.praktyki.squash.repository.RoundRepository;
@@ -13,11 +14,17 @@ import java.util.List;
 public class RoundFacade {
 
     @Resource
+    GameFacade gameFacade;
+
+    @Resource
     RoundRepository roundRepository;
 
+    public List<GameDTO> getGamesForRound(int roundId){
+        Round round = roundRepository.findById(roundId).get();
+        return gameFacade.convertGames(round.getGames());
+    }
 
-
-    public List<RoundDTO> getRound(){
+    public List<RoundDTO> getRounds(){
         Iterable<Round> rounds = roundRepository.findAll();
 
         return (List<RoundDTO>) convertRound(rounds);
@@ -38,5 +45,10 @@ public class RoundFacade {
         roundDto.setName(rounds.getName());
 
         return roundDto;
+    }
+
+    public RoundDTO getRoundById(Integer roundId) {
+        Round round = roundRepository.findById(roundId).get();
+        return convertRound(round);
     }
 }
