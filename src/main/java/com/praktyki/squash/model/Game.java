@@ -21,6 +21,9 @@ public class Game {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
     private List<Score> scores;
 
+    @ManyToOne
+    private Round round;
+
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;

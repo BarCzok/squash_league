@@ -19,6 +19,10 @@ public class Round {
     @OneToMany(mappedBy = "round")
     private List<History> histories;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "round")
+    private List<Game> games;
+
     public int getId() {
         return id;
     }
@@ -34,5 +38,4 @@ public class Round {
     public void setName(String name) {
         this.name = name;
     }
-
 }
