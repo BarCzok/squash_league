@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface CustomGamesRepository {
-    Map<Groupss, List<Game>> getGamesForRoundSQL(int roundId);
+    Map<Groupss, List<Game>> getGamesInGroups(int roundId);
 }

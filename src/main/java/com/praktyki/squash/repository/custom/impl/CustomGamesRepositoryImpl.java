@@ -20,7 +20,7 @@ public class CustomGamesRepositoryImpl implements CustomGamesRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Map<Groupss, List<Game>> getGamesForRoundSQL(int roundId){
+    public Map<Groupss, List<Game>> getGamesInGroups(int roundId){
         Query query = entityManager.createQuery("select distinct h.groupp from History as h where h.round.id = :roundId");
         query.setParameter("roundId", roundId);
 
