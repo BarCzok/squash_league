@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class DefaultSquashLeaguePlayersRepository implements CustomPlayersRepository {
+public class CustomPlayersRepositoryImpl implements CustomPlayersRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
