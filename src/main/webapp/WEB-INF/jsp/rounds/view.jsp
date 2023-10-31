@@ -1,3 +1,8 @@
+<%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.GameDTO>"--%>
+<%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.RoundDTO>"--%>
+<%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.ScoreDTO>"--%>
+<%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.PlayerDTO>"--%>
+<%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.GroupDTO>"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,6 +12,10 @@
 <head>
     <title>Games Table</title>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
         a {
             text-decoration: none;
             color: black;
@@ -36,6 +45,7 @@
 
 
         .div{
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
