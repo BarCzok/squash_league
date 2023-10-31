@@ -17,7 +17,6 @@ public class RoundControler {
 
     @GetMapping(value = "/view/{roundId}")
     public String home(ModelMap model, @PathVariable Integer roundId){
-
         model.addAttribute("games", roundFacade.getGamesForRound(roundId));
         RoundDTO roundDto = roundFacade.getRoundById(roundId);
         model.addAttribute("roundName", roundDto.getName());

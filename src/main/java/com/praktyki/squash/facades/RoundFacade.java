@@ -3,11 +3,16 @@ package com.praktyki.squash.facades;
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
+import com.praktyki.squash.model.Game;
+import com.praktyki.squash.model.Groupss;
+import com.praktyki.squash.model.Player;
 import com.praktyki.squash.model.Round;
 import com.praktyki.squash.repository.RoundRepository;
 
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,16 +28,51 @@ public class RoundFacade {
     @Resource
     RoundRepository roundRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     //Bartek w SQL
     public Map<GroupDTO, List<GameDTO>> getGamesForRoundSQL(int roundId){
-        HashMap<GroupDTO, List<GameDTO>> gamesForRound = new HashMap<>();
+        Query query = entityManager.createQuery("select distinct h.groupp from History as h where h.round.id = :roundId");
+        query.setParameter("roundId", roundId);
 
-        return gamesForRound;
+        List<Groupss> groups = query.getResultList();
+
+        Query query1 = entityManager.createQuery("SELECT " +
+                "    g " +
+                "FROM " +
+                "    Game as g " +
+                "        INNER JOIN " +
+                "    Round as r ON g.round.id = r.id " +
+                "        INNER JOIN " +
+                "    History as h ON r.id = h.round.id and h.player.id = g.player1.id " +
+                "    where h.groupp.id=:groupId and h.round.id=:roundId"
+        );
+
+        Map<Groupss, List<Game>> games4groups = new HashMap<>();
+
+        groups.forEach(group -> {
+            query1.setParameter("roundId", roundId);
+            query1.setParameter("groupId", group.getId());
+
+            List<Game> resultList = query1.getResultList();
+
+            games4groups.put(group, resultList);
+        });
+
+        return null;
     }
 
 //    public Category findByName(String categoryName) {
-//        Query query = entityManager.createQuery("select c from Category as c where c.name = :categoryName");
-//        query.setParameter("categoryName", categoryName);
+//        Query query = entityManager.createQuery("SELECT
+//    g.game_id
+//FROM
+//    games g
+//        INNER JOIN
+//    rounds r ON g.round_id = r.round_id
+//        INNER JOIN
+//    history h ON r.round_id = h.round_id and h.player_id = g.player1
+//    where h.group_id = 1 and h.round_id = 1;
 //
 //        return (Category) query.getSingleResult();
 //    }
