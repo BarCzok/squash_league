@@ -24,7 +24,6 @@ public class CustomPlayersRepositoryImpl implements CustomPlayersRepository {
 
         List<Groupss> groups = query.getResultList();
 
-
         Map<Groupss, List<Player>> players4groups = new HashMap<>();
 
         groups.forEach(group -> {

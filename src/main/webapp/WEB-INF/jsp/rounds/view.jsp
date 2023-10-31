@@ -1,4 +1,4 @@
-<%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.GameDTO>"--%>
+<%--@elvariable id="games" type="java.util.Map<com.praktyki.squash.facades.dto.GroupDTO, java.util.List<com.praktyki.squash.facades.dto.GameDTO>>"--%>
 <%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.RoundDTO>"--%>
 <%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.ScoreDTO>"--%>
 <%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.PlayerDTO>"--%>
@@ -57,22 +57,26 @@
 <body>
 <div class =  "div">
     <center><h1>Games/${roundName}</h1></center>
+    <br>
+    <c:forEach var="entry" items="${games.entrySet()}">
+        <c:set var="group" value="${entry.key}"/>
+            <center><h1>Games/${roundName}/${group.name}</h1></center>
+            <table>
+                <colgroup>
+                    <col span="2" style="background-color: #D6EEEE">
+                </colgroup>
+                <thead>
+                <td>Player1</td>
+                <td>Player2</td>
+                <td>Score</td>
+                <td>SetPoints</td>
+                <td>WinPoints</td>
+                <td>PlayPoints</td>
+                <td>TotalPoints</td>
+                </thead>
 
-    <table>
-        <colgroup>
-            <col span="2" style="background-color: #D6EEEE">
-        </colgroup>
-        <thead>
-        <td>Player1</td>
-        <td>Player2</td>
-        <td>Score</td>
-        <td>SetPoints</td>
-        <td>WinPoints</td>
-        <td>PlayPoints</td>
-        <td>TotalPoints</td>
-        </thead>
-        <c:forEach var="game" items="${games}">
 
+                <c:forEach var="game" items="${entry.value}">
                 <c:set var="score1" value="${game.scores[0]}"/>
                 <c:set var="score2" value="${game.scores[1]}"/>
 
@@ -94,8 +98,10 @@
                 </tr>
 
 
+            </c:forEach>
+            </table>
+            <br>
         </c:forEach>
-    </table>
 
 </div>
 

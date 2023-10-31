@@ -9,6 +9,8 @@ import com.praktyki.squash.model.Player;
 import com.praktyki.squash.model.Round;
 import com.praktyki.squash.repository.RoundRepository;
 
+import com.praktyki.squash.repository.custom.CustomGamesRepository;
+import com.praktyki.squash.repository.custom.CustomPlayersRepository;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -26,68 +28,25 @@ public class RoundFacade {
     GameFacade gameFacade;
 
     @Resource
+    GroupFacade groupFacade;
+
+    @Resource
     RoundRepository roundRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Resource
+    CustomGamesRepository gamesRepository;
 
-    //Bartek w SQL
-    public Map<GroupDTO, List<GameDTO>> getGamesForRoundSQL(int roundId){
-        Query query = entityManager.createQuery("select distinct h.groupp from History as h where h.round.id = :roundId");
-        query.setParameter("roundId", roundId);
+    public Map<GroupDTO, List<GameDTO>> getGamesForRound(int roundId){
+        Map<Groupss, List<Game>> gamesForRoundSQL = gamesRepository.getGamesForRoundSQL(roundId);
 
-        List<Groupss> groups = query.getResultList();
-
-        Query query1 = entityManager.createQuery("SELECT " +
-                "    g " +
-                "FROM " +
-                "    Game as g " +
-                "        INNER JOIN " +
-                "    Round as r ON g.round.id = r.id " +
-                "        INNER JOIN " +
-                "    History as h ON r.id = h.round.id and h.player.id = g.player1.id " +
-                "    where h.groupp.id=:groupId and h.round.id=:roundId"
-        );
-
-        Map<Groupss, List<Game>> games4groups = new HashMap<>();
-
-        groups.forEach(group -> {
-            query1.setParameter("roundId", roundId);
-            query1.setParameter("groupId", group.getId());
-
-            List<Game> resultList = query1.getResultList();
-
-            games4groups.put(group, resultList);
+        Map<GroupDTO, List<GameDTO>> result = new HashMap<>();
+        gamesForRoundSQL.forEach( (group, games) -> {
+            GroupDTO groupDTO = groupFacade.convertGroupss(group);
+            List<GameDTO> gameDTOS = gameFacade.convertGames(games);
+            result.put(groupDTO, gameDTOS);
         });
 
-        return null;
-    }
-
-//    public Category findByName(String categoryName) {
-//        Query query = entityManager.createQuery("SELECT
-//    g.game_id
-//FROM
-//    games g
-//        INNER JOIN
-//    rounds r ON g.round_id = r.round_id
-//        INNER JOIN
-//    history h ON r.round_id = h.round_id and h.player_id = g.player1
-//    where h.group_id = 1 and h.round_id = 1;
-//
-//        return (Category) query.getSingleResult();
-//    }
-
-    //Wojtek obiektowo
-    public Map<GroupDTO, List<GameDTO>> getGamesForRoundObject(int roundId){
-        HashMap<GroupDTO, List<GameDTO>> gamesForRound = new HashMap<>();
-
-        return gamesForRound;
-    }
-
-    public List<GameDTO> getGamesForRound(int roundId){
-        Round round = roundRepository.findById(roundId).get();
-
-        return gameFacade.convertGames(round.getGames());
+        return result;
     }
 
     public List<RoundDTO> getRounds(){
