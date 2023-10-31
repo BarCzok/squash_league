@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Component
 public class TestData {
 
-    int roundsCount = 2;
-
+    int roundsCount = 1;
     int groupsCount = 3;
     int playersCount = 9;
     private List<Player> players = new ArrayList<>();
@@ -75,14 +75,20 @@ public class TestData {
 }
 
     public void createGames(Round round) {
-        for(int i=0; i<players.size(); i++){
-            for(int j=0; j<players.size(); j++){
-                if(i>j){
-                    Game game = new Game();
-                    game.setPlayer1(players.get(i));
-                    game.setPlayer2(players.get(j));
-                    game.setRound(round);
-                    games.add(game);
+
+        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
+
+        for(Groupss g : playersInGroups.keySet()) {
+            List<Player> playersFromGroup = playersInGroups.get(g);
+            for (int i = 0; i < playersFromGroup.size(); i++) {
+                for (int j = 0; j < playersFromGroup.size(); j++) {
+                    if (i > j) {
+                        Game game = new Game();
+                        game.setPlayer1(playersFromGroup.get(i));
+                        game.setPlayer2(playersFromGroup.get(j));
+                        game.setRound(round);
+                        games.add(game);
+                    }
                 }
             }
         }
@@ -115,7 +121,7 @@ public class TestData {
             History history = new History();
             history.setPlayer(player);
             history.setGroupp(groups.get(g%groupsCount));
-            history.setRound(rounds.get(r%roundsCount));
+            history.setRound(rounds.get(0));
             historyRepository.save(history);
             g++;
             r++;

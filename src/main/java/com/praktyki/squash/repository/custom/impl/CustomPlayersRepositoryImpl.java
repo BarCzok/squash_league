@@ -1,7 +1,5 @@
 package com.praktyki.squash.repository.custom.impl;
 
-import com.praktyki.squash.facades.dto.GameDTO;
-import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.model.Groupss;
 import com.praktyki.squash.model.Player;
 import com.praktyki.squash.repository.custom.CustomPlayersRepository;
@@ -26,21 +24,13 @@ public class CustomPlayersRepositoryImpl implements CustomPlayersRepository {
 
         List<Groupss> groups = query.getResultList();
 
-        Query query1 = entityManager.createQuery("SELECT " +
-                "    h.player " +
-                "FROM " +
-                "    Round as r " +
-                "        INNER JOIN " +
-                "    History as h ON r.id = h.round.id" +
-                "    where h.groupp.id=:groupId and h.round.id=:roundId"
-        );
 
         Map<Groupss, List<Player>> players4groups = new HashMap<>();
 
         groups.forEach(group -> {
+            Query query1 = entityManager.createQuery("SELECT h.player FROM History as h where h.groupp.id=:groupId and h.round.id=:roundId");
             query1.setParameter("roundId", roundId);
             query1.setParameter("groupId", group.getId());
-
             List<Player> resultList = query1.getResultList();
 
             players4groups.put(group, resultList);
