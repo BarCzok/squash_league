@@ -2,6 +2,7 @@ package com.praktyki.squash.facades;
 
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
+import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
 import com.praktyki.squash.model.Game;
 import com.praktyki.squash.model.Groupss;
@@ -11,10 +12,7 @@ import com.praktyki.squash.repository.RoundRepository;
 import com.praktyki.squash.repository.custom.CustomGamesRepository;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class RoundFacade {
@@ -31,10 +29,14 @@ public class RoundFacade {
     @Resource
     CustomGamesRepository gamesRepository;
 
+    public Map<GroupDTO, List<PlayerDTO>> getPlayrsForRound(int roundId){
+        return new HashMap<>();
+    }
+
     public Map<GroupDTO, List<GameDTO>> getGamesForRound(int roundId){
         Map<Groupss, List<Game>> gamesForRoundSQL = gamesRepository.getGamesInGroups(roundId);
 
-        Map<GroupDTO, List<GameDTO>> result = new HashMap<>();
+        Map<GroupDTO, List<GameDTO>> result = new TreeMap<>();
         gamesForRoundSQL.forEach( (group, games) -> {
             GroupDTO groupDTO = groupFacade.convertGroupss(group);
             List<GameDTO> gameDTOS = gameFacade.convertGames(games);
