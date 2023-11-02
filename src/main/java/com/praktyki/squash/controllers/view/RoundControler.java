@@ -3,6 +3,7 @@ package com.praktyki.squash.controllers.view;
 import com.praktyki.squash.facades.RoundFacade;
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
+import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +25,9 @@ public class RoundControler {
     public String home(ModelMap model, @PathVariable Integer roundId){
 
         Map<GroupDTO, List<GameDTO>> gamesForRound = roundFacade.getGamesForRound(roundId);
+        Map<GroupDTO, List<PlayerDTO>> playersForRound = roundFacade.getPlayersInGroups(roundId);
         model.addAttribute("games", gamesForRound);
+        model.addAttribute("players", playersForRound);
         RoundDTO roundDto = roundFacade.getRoundById(roundId);
         model.addAttribute("roundName", roundDto.getName());
         return "rounds/view";

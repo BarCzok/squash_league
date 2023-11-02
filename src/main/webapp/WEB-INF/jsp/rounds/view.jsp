@@ -1,3 +1,4 @@
+<%--@elvariable id="players" type="java.util.Map<com.praktyki.squash.facades.dto.GroupDTO, java.util.List<com.praktyki.squash.facades.dto.PlayerDTO>>"--%>
 <%--@elvariable id="games" type="java.util.Map<com.praktyki.squash.facades.dto.GroupDTO, java.util.List<com.praktyki.squash.facades.dto.GameDTO>>"--%>
 <%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.RoundDTO>"--%>
 <%--@elvariable id="games" type="java.util.List<com.praktyki.squash.facades.dto.ScoreDTO>"--%>
@@ -15,6 +16,7 @@
         *{
             padding: 0;
             margin: 0;
+            box-sizing: border-box;
         }
         a {
             text-decoration: none;
@@ -31,6 +33,7 @@
             font-family: Tahoma, sans-serif;
             display: flex;
             justify-content: center;
+            height: 1500px;
         }
 
         td, th {
@@ -100,8 +103,41 @@
 
             </c:forEach>
             </table>
-            <br>
-        </c:forEach>
+        <br><br>
+    </c:forEach>
+
+                <center>
+                    <h1>Players/Groups/${roundName}</h1>
+                    <c:forEach var="entry" items="${players.entrySet()}">
+                        <c:set var="group" value="${entry.key}"/>
+                        <c:set var="place" value="0"/>
+                        <table>
+                            <colgroup>
+                                <col span="1" style="background-color: white">
+                            </colgroup>
+                            <thead>
+                            <td>Place</td>
+                            <td>Player</td>
+                            <td>Group</td>
+                            </thead>
+
+                            <c:forEach var="player" items="${entry.value}">
+                                <tr>
+                                    <td>${place=place+1}</td>
+                                    <td>${player.name}</td>
+                                    <td>${group.name}</td>
+                                </tr>
+
+
+                            </c:forEach>
+                        </table>
+
+                        <br>
+
+                    </c:forEach>
+                </center>
+
+
 
 </div>
 
