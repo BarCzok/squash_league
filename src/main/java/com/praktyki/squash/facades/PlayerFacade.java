@@ -25,7 +25,7 @@ public class PlayerFacade {
         return convertPlayers(players);
     }
 
-    private List<PlayerDTO> convertPlayers(Iterable<Player> players) {
+    public List<PlayerDTO> convertPlayers(Iterable<Player> players) {
         List<PlayerDTO> playerDtos = new ArrayList<>();
 
         players.forEach(player -> playerDtos.add(convertPlayer(player)));

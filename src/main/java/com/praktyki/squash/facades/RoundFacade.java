@@ -6,8 +6,10 @@ import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
 import com.praktyki.squash.model.Game;
 import com.praktyki.squash.model.Groupss;
+import com.praktyki.squash.model.Player;
 import com.praktyki.squash.model.Round;
 import com.praktyki.squash.repository.RoundRepository;
+import com.praktyki.squash.repository.PlayersRepository;
 
 import com.praktyki.squash.repository.custom.CustomGamesRepository;
 import org.springframework.stereotype.Component;
@@ -21,16 +23,30 @@ public class RoundFacade {
     GameFacade gameFacade;
 
     @Resource
+    PlayerFacade playerFacade;
+
+    @Resource
     GroupFacade groupFacade;
 
     @Resource
     RoundRepository roundRepository;
+    @Resource
+    PlayersRepository playersRepository;
 
     @Resource
     CustomGamesRepository gamesRepository;
 
-    public Map<GroupDTO, List<PlayerDTO>> getPlayrsForRound(int roundId){
-        return new HashMap<>();
+
+    public Map<GroupDTO, List<PlayerDTO>> getPlayersInGroups(int roundId){
+        Map<Groupss, List<Player>> playersInGroupsSQL = playersRepository.getPlayersInGroups(roundId);
+
+        Map<GroupDTO, List<PlayerDTO>> result = new TreeMap<>();
+        playersInGroupsSQL.forEach( (group, players ) -> {
+            GroupDTO groupDTO = groupFacade.convertGroupss(group);
+            List<PlayerDTO> playerDTOS = playerFacade.convertPlayers(players);
+            result.put(groupDTO, playerDTOS);
+        });
+     return result;
     }
 
     public Map<GroupDTO, List<GameDTO>> getGamesForRound(int roundId){
@@ -45,6 +61,7 @@ public class RoundFacade {
 
         return result;
     }
+
 
     public List<RoundDTO> getRounds(){
         Iterable<Round> rounds = roundRepository.findAll();
@@ -73,4 +90,7 @@ public class RoundFacade {
         Round round = roundRepository.findById(roundId).get();
         return convertRound(round);
     }
+
+
+
 }
