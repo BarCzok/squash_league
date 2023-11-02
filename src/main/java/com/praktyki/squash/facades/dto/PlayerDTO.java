@@ -5,6 +5,7 @@ public class PlayerDTO {
     String name;
     int phoneNumber;
     String adress;
+    private int totalPoints;
 
     public int getId() {
         return id;
@@ -46,5 +47,13 @@ public class PlayerDTO {
                 ", phoneNumber=" + phoneNumber +
                 ", adress='" + adress + '\'' +
                 '}';
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 }

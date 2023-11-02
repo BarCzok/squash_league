@@ -1,9 +1,6 @@
 package com.praktyki.squash.facades;
 
-import com.praktyki.squash.facades.dto.GameDTO;
-import com.praktyki.squash.facades.dto.GroupDTO;
-import com.praktyki.squash.facades.dto.PlayerDTO;
-import com.praktyki.squash.facades.dto.RoundDTO;
+import com.praktyki.squash.facades.dto.*;
 import com.praktyki.squash.model.Game;
 import com.praktyki.squash.model.Groupss;
 import com.praktyki.squash.model.Player;
@@ -44,9 +41,54 @@ public class RoundFacade {
         playersInGroupsSQL.forEach( (group, players ) -> {
             GroupDTO groupDTO = groupFacade.convertGroupss(group);
             List<PlayerDTO> playerDTOS = playerFacade.convertPlayers(players);
+
+            for (PlayerDTO playerDTO : playerDTOS) {
+                List<GameDTO> playersGames = getPlayerGames(roundId, groupDTO.getId(), playerDTO.getId());
+                int points = getTotalPoints(playersGames, playerDTO.getId());
+                playerDTO.setTotalPoints(points);
+            }
+
+            playerDTOS.sort((p1, p2) -> p1.getTotalPoints() - p2.getTotalPoints());
+
             result.put(groupDTO, playerDTOS);
         });
      return result;
+    }
+
+    private int getTotalPoints(List<GameDTO> playersGames, int playerId) {
+        int totalPoints = 0;
+        for (GameDTO playersGame : playersGames) {
+            ScoreDTO scoreDTO = null;
+            if(playersGame.getPlayer1().getId()==playerId){
+                scoreDTO = playersGame.getScores().get(0);
+            }
+            if(playersGame.getPlayer2().getId()==playerId){
+                scoreDTO = playersGame.getScores().get(1);
+            }
+
+            totalPoints += scoreDTO.getTotalPoints();
+        }
+        return totalPoints;
+    }
+
+    private List<GameDTO> getPlayerGames(int roundId, int groupId, int playerId) {
+        Map<GroupDTO, List<GameDTO>> gamesForRound = getGamesForRound(roundId);
+
+        List<GameDTO> result = new ArrayList<>();
+        for (Map.Entry<GroupDTO, List<GameDTO>> entry : gamesForRound.entrySet()) {
+            GroupDTO group = entry.getKey();
+            if (group.getId() == groupId) {
+                for (GameDTO gameDTO : entry.getValue()) {
+                    if(gameDTO.getPlayer1().getId() == playerId){
+                        result.add(gameDTO);
+                    }
+                    if(gameDTO.getPlayer2().getId() == playerId){
+                        result.add(gameDTO);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     public Map<GroupDTO, List<GameDTO>> getGamesForRound(int roundId){
