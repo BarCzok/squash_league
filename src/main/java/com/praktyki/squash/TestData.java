@@ -78,8 +78,8 @@ public class TestData {
 
         Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
 
-        for(Groupss g : playersInGroups.keySet()) {
-            List<Player> playersFromGroup = playersInGroups.get(g);
+        for(Groupss group : playersInGroups.keySet()) {
+            List<Player> playersFromGroup = playersInGroups.get(group);
             for (int i = 0; i < playersFromGroup.size(); i++) {
                 for (int j = 0; j < playersFromGroup.size(); j++) {
                     if (i > j) {

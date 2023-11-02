@@ -19,6 +19,6 @@ public class SquashApplication implements WebMvcConfigurer {
         testData.createHistories();
 
         testData.createGames();
-//        testData.createScores();
+        testData.createScores();
     }
 }

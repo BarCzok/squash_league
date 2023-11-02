@@ -1,6 +1,6 @@
 package com.praktyki.squash.facades.dto;
 
-public class GroupDTO {
+public class GroupDTO implements Comparable {
 
     int id;
     String name;
@@ -27,6 +27,12 @@ public class GroupDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        GroupDTO other = (GroupDTO) o;
+        return other.id - this.id;
     }
 }
 
