@@ -10,11 +10,24 @@ import java.util.List;
 @Entity
 @Table (name="Round")
 public class Round {
+    @Override
+    public String toString() {
+        return "Round{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", histories=" + histories +
+                ", games=" + games +
+                '}';
+    }
 
     @Id
     @GeneratedValue
     private int id;
     private String name;
+    private String startDate;
+    private String endDate;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "round")
     private List<History> histories;
@@ -45,5 +58,29 @@ public class Round {
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<History> histories) {
+        this.histories = histories;
     }
 }

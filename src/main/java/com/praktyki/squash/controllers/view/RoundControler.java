@@ -5,6 +5,7 @@ import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
+import com.praktyki.squash.model.Round;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,13 @@ import java.util.Map;
 public class RoundControler {
     @Resource
     RoundFacade roundFacade;
+
+    @GetMapping(value = "/view")
+    public String home(ModelMap model){
+        List<RoundDTO> rounds = roundFacade.getRounds();
+        model.addAttribute("rounds", rounds);
+        return "rounds/allrounds";
+    }
 
     @GetMapping(value = "/view/{roundId}")
     public String home(ModelMap model, @PathVariable Integer roundId){

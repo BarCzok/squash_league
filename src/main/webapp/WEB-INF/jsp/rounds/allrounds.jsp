@@ -1,17 +1,13 @@
-<%--@elvariable id="players" type="java.util.Map<com.praktyki.squash.facades.dto.GroupDTO, java.util.List<com.praktyki.squash.facades.dto.PlayerDTO>>"--%>
-<%--@elvariable id="games" type="java.util.Map<com.praktyki.squash.facades.dto.GroupDTO, java.util.List<com.praktyki.squash.facades.dto.GameDTO>>"--%>
 <%--@elvariable id="rounds" type="java.util.List<com.praktyki.squash.facades.dto.RoundDTO>"--%>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="forms" uri="http://www.springframework.org/tags/form" %>
 
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Games Table</title>
+    <title>allRounds</title>
     <style>
         *{
             padding: 0;
@@ -56,16 +52,29 @@
 
     </style>
 </head>
-
 <body>
 <div>
-    <center><h1>Games/${roundName}</h1></center>
-    <br>
-    <tags:games games="${games}"/>
+    <table>
+        <colgroup>
+            <col span="1" style="background-color: white">
+        </colgroup>
+        <thead>
+            <td>RoundName</td>
+            <td>StartDate</td>
+            <td>EndDate</td>
+        </thead>
 
-    <tags:playerRanking/>
-
+        <c:forEach var="round" items="${rounds}">
+            <tr>
+                <td><a href="view/${round.id}">${round.name}</a></td>
+                <td>${round.startDate}</td>
+                <td>${round.endDate}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
+
+
 
 
 </body>

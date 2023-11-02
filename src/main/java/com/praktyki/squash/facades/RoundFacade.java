@@ -124,6 +124,8 @@ public class RoundFacade {
 
         roundDto.setId(rounds.getId());
         roundDto.setName(rounds.getName());
+        roundDto.setStartDate(rounds.getStartDate());
+        roundDto.setEndDate(rounds.getEndDate());
 
         return roundDto;
     }

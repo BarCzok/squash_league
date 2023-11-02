@@ -54,6 +54,8 @@ public class TestData {
     public void createRound(){
         for (int i =0; i < roundsCount ; i++) {
             Round round = new Round();
+            round.setEndDate("endingRound" + i);
+            round.setStartDate("starRound" + i);
             round.setName("Runda "+ i);
             rounds.add(round);
         }
@@ -127,6 +129,7 @@ public class TestData {
             r++;
         }
     }
+
 
     public void createGames() {
         rounds.forEach(this::createGames);
