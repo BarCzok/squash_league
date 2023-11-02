@@ -48,14 +48,14 @@ public class RoundFacade {
                 playerDTO.setTotalPoints(points);
             }
 
-            playerDTOS.sort((p1, p2) -> p1.getTotalPoints() - p2.getTotalPoints());
+            playerDTOS.sort((p1, p2) -> p2.getTotalPoints() - p1.getTotalPoints());
 
             result.put(groupDTO, playerDTOS);
         });
      return result;
     }
 
-    private int getTotalPoints(List<GameDTO> playersGames, int playerId) {
+    public int getTotalPoints(List<GameDTO> playersGames, int playerId) {
         int totalPoints = 0;
         for (GameDTO playersGame : playersGames) {
             ScoreDTO scoreDTO = null;
