@@ -3,6 +3,7 @@ package com.praktyki.squash.facades;
 import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.model.Groupss;
 import com.praktyki.squash.repository.GroupssRepository;
+import net.bytebuddy.TypeCache;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,9 +26,11 @@ public class GroupFacade {
         List<GroupDTO> groupDtos = new ArrayList<>();
 
         groupss.forEach(x -> groupDtos.add(convertGroupss(x)));
+        groupDtos.sort((g1, g2) -> g1.getGroupRank() - g2.getGroupRank());
 
         return groupDtos;
     }
+
 
     public GroupDTO convertGroupss(Groupss groupss) {
         GroupDTO groupDto = new GroupDTO();

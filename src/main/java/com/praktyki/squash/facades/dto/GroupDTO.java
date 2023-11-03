@@ -4,6 +4,7 @@ public class GroupDTO implements Comparable {
 
     int id;
     String name;
+    private int groupRank;
 
     public int getId() {
         return id;
@@ -21,18 +22,27 @@ public class GroupDTO implements Comparable {
         this.name = name;
     }
 
+    public int getGroupRank() {
+        return groupRank;
+    }
+
+    public void setGroupRank(int groupRank) {
+        this.groupRank = groupRank;
+    }
+
     @Override
     public String toString() {
-        return "GroupssDTO{" +
+        return "GroupDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", groupRank=" + groupRank +
                 '}';
     }
 
     @Override
     public int compareTo(Object o) {
         GroupDTO other = (GroupDTO) o;
-        return other.id - this.id;
+        return this.id - other.id;
     }
 }
 
