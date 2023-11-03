@@ -129,9 +129,14 @@ public class TestData {
             r++;
         }
     }
-
-
     public void createGames() {
         rounds.forEach(this::createGames);
     }
+
+
+    public void getPlayersByPhoneNr(){
+        Player byPhoneNumber1 = playersRepository.findByPhoneNumber(837349531);
+    }
+
 }
+

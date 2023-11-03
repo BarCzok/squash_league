@@ -9,4 +9,6 @@ import java.util.Map;
 public interface CustomPlayersRepository {
 
     Map<Groupss, List<Player>> getPlayersInGroups(int roundId);
+
+    Player findByPhoneNumber(int phoneNumber);
 }

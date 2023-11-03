@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,4 +38,13 @@ public class CustomPlayersRepositoryImpl implements CustomPlayersRepository {
 
         return players4groups;
     }
+
+    @Override
+    public Player findByPhoneNumber(int phoneNumber) {
+        Query query = entityManager.createQuery("select p from Player as p where p.phoneNumber = :phoneNumber");
+        query.setParameter("phoneNumber", phoneNumber);
+
+        return (Player) query.getSingleResult();
+    }
+
 }

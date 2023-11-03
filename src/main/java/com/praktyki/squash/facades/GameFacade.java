@@ -52,6 +52,7 @@ public class GameFacade {
     }
 
     public GameDTO getGame(Integer gameId) {
+
         return convertGame(gameRepository.findById(gameId).get());
     }
 }
