@@ -66,7 +66,7 @@
 
         <c:forEach var="round" items="${rounds}">
             <tr>
-                <td><a href="view/${round.id}">${round.name}</a></td>
+                <td><a href="${round.id}/view">${round.name}</a></td>
                 <td>${round.startDate}</td>
                 <td>${round.endDate}</td>
             </tr>

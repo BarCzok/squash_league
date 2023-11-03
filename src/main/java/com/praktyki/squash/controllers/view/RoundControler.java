@@ -7,10 +7,9 @@ import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
 import com.praktyki.squash.model.Round;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,6 +26,19 @@ public class RoundControler {
         List<RoundDTO> rounds = roundFacade.getRounds();
         model.addAttribute("rounds", rounds);
         return "rounds/allrounds";
+    }
+
+    @GetMapping(value = "/{roundId}/view")
+    public String home(ModelMap model, @PathVariable Integer roundId,
+                       @RequestParam(value = "foo", required = false) String foo){
+        String valueFoo = foo;
+        Map<GroupDTO, List<GameDTO>> gamesForRound = roundFacade.getGamesForRound(roundId);
+        Map<GroupDTO, List<PlayerDTO>> playersForRound = roundFacade.getPlayersInGroups(roundId);
+        model.addAttribute("games", gamesForRound);
+        model.addAttribute("players", playersForRound);
+        RoundDTO roundDto = roundFacade.getRoundById(roundId);
+        model.addAttribute("roundName", roundDto.getName());
+        return "rounds/view";
     }
 
     @GetMapping(value = "/view/{roundId}")

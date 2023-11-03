@@ -5,10 +5,7 @@ import com.praktyki.squash.repository.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class TestData {
@@ -69,7 +66,6 @@ public class TestData {
             Groupss group = new Groupss();
             group.setName("Grupa" + i);
             group.add(group);
-
             groups.add(group);
         }
 
@@ -133,6 +129,34 @@ public class TestData {
         rounds.forEach(this::createGames);
     }
 
+//    public void createGroupTransitions(Groupss sourceGroup, int roundId){
+//        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(roundId);
+//
+//        Map.Entry<Groupss, List<Player>> groupssListEntry = playersInGroups.entrySet().stream().filter(e -> e.getKey().getId() == sourceGroup.getId()).findFirst().get();
+//
+//        Groupss g = groupssListEntry.getKey();
+//        int groupSize = groupssListEntry.getValue().size();
+//
+//        if(g.getName().equals("Grupa0")){
+//            //first group
+//            Map<Integer, Groupss> transitionRules = new HashMap<>();
+//            transitionRules.put(1, sourceGroup);
+//            transitionRules.put(2, sourceGroup);
+//
+//
+//            sourceGroup.setTransitionRules(transitionRules);
+//
+//            groupsRepository.save(sourceGroup);
+//        }
+//        else if(g.getName().equals("Grupa"+(playersInGroups.size()-1))){
+//            //last group
+//        }
+//        else {
+//            //other groups
+//        }
+//
+//
+//    }
 
     public void getPlayersByPhoneNr(){
         Player byPhoneNumber1 = playersRepository.findByPhoneNumber(837349531);

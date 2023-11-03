@@ -50,6 +50,11 @@ public class RoundFacade {
 
             playerDTOS.sort((p1, p2) -> p2.getTotalPoints() - p1.getTotalPoints());
 
+            int placeInGroup=1;
+            for (PlayerDTO playerDTO : playerDTOS) {
+                playerDTO.setPlaceInGroup(placeInGroup++);
+            }
+
             result.put(groupDTO, playerDTOS);
         });
      return result;

@@ -7,7 +7,6 @@
                     <h1>Players/Groups/${roundName}</h1>
                     <c:forEach var="entry" items="${players.entrySet()}">
                         <c:set var="group" value="${entry.key}"/>
-                        <c:set var="place" value="0"/>
                         <table>
                             <colgroup>
                                 <col span="1" style="background-color: white">
@@ -21,7 +20,7 @@
 
                             <c:forEach var="player" items="${entry.value}">
                                 <tr>
-                                    <td>${place=place+1}</td>
+                                    <td>${player.placeInGroup}</td>
                                     <td>${player.name}</td>
                                     <td>${group.name}</td>
                                     <td>${player.totalPoints}</td>
