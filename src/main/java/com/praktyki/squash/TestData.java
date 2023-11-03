@@ -65,6 +65,7 @@ public class TestData {
         for(int i=0; i<groupsCount;i++) {
             Groupss group = new Groupss();
             group.setName("Grupa" + i);
+            group.setGroupRank(i);
             group.add(group);
             groups.add(group);
         }

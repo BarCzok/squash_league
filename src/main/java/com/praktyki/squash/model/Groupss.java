@@ -14,6 +14,15 @@ import java.util.Map;
     @Id
     @GeneratedValue
     private int id;
+    private int groupRank;
+
+    public int getGroupRank() {
+        return groupRank;
+    }
+
+    public void setGroupRank(int groupRank) {
+        this.groupRank = groupRank;
+    }
 
     private String name;
 
