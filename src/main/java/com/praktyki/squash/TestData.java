@@ -33,8 +33,12 @@ public class TestData {
 
     @Resource
     RoundRepository roundRepository;
+
     @Resource
     HistoryRepository historyRepository;
+
+    @Resource
+    TransitionrulesRepository transitionrulesRepository;
 
     public void createPlayers() {
         for (int i = 0; i < playersCount; i++) {
@@ -66,7 +70,6 @@ public class TestData {
             Groupss group = new Groupss();
             group.setName("Grupa" + i);
             group.setGroupRank(i);
-            group.add(group);
             groups.add(group);
         }
 
@@ -130,34 +133,98 @@ public class TestData {
         rounds.forEach(this::createGames);
     }
 
-//    public void createGroupTransitions(Groupss sourceGroup, int roundId){
-//        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(roundId);
+    public void createGroupTransitions(Groupss sourceGroup, int roundId){
+        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(roundId);
+
+        Map.Entry<Groupss, List<Player>> groupssListEntry = playersInGroups.entrySet().stream().filter(e -> e.getKey().getId() == sourceGroup.getId()).findFirst().get();
+
+        Groupss g = groupssListEntry.getKey();
+        int groupSize = groupssListEntry.getValue().size();
+
+        if(g.getName().equals("Grupa0")){
+            //first group
+            List<TransitionRule> trasitionRules = new ArrayList<>();
+
+            for(int i=1; i<groupSize; i++) {
+                TransitionRule transitionRule = new TransitionRule();
+                transitionRule.setPosition(i);
+                transitionRule.setTargetGroup(sourceGroup);
+                transitionRule.setSourceGroup(sourceGroup);
+                trasitionRules.add(transitionRule);
+            }
+
+            //last player degrades to lower group
+            //TODO: create transition rule
+//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
 //
-//        Map.Entry<Groupss, List<Player>> groupssListEntry = playersInGroups.entrySet().stream().filter(e -> e.getKey().getId() == sourceGroup.getId()).findFirst().get();
+//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+//            transitionRuleLowerGroup.setPosition(groupSize);
+//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+//            trasitionRules.add(transitionRuleLowerGroup);
+
+            transitionrulesRepository.saveAll(trasitionRules);
+        }
+        else if(g.getName().equals("Grupa"+(playersInGroups.size()-1))){
+            //last group
+            List<TransitionRule> trasitionRules = new ArrayList<>();
+
+            //only first player advances to the higher group
+            //TODO: create transition rule
+//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
 //
-//        Groupss g = groupssListEntry.getKey();
-//        int groupSize = groupssListEntry.getValue().size();
+//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+//            transitionRuleHigherGroup.setPosition(1);
+//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+//            trasitionRules.add(transitionRuleHigherGroup);
+
+            //players from rank > 2 stay in the same group
+            for(int i=2; i<=groupSize; i++) {
+                TransitionRule transitionRuleSameGroup = new TransitionRule();
+                transitionRuleSameGroup.setPosition(i);
+                transitionRuleSameGroup.setTargetGroup(sourceGroup); //next group
+                transitionRuleSameGroup.setSourceGroup(sourceGroup); //next group
+                trasitionRules.add(transitionRuleSameGroup);
+            }
+
+            transitionrulesRepository.saveAll(trasitionRules);
+        }
+        else {
+            //other groups
+            List<TransitionRule> trasitionRules = new ArrayList<>();
+
+            //TODO: create transition rule
+//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
 //
-//        if(g.getName().equals("Grupa0")){
-//            //first group
-//            Map<Integer, Groupss> transitionRules = new HashMap<>();
-//            transitionRules.put(1, sourceGroup);
-//            transitionRules.put(2, sourceGroup);
+//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+//            transitionRuleHigherGroup.setPosition(1);
+//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+//            trasitionRules.add(transitionRuleHigherGroup);
+
+            //players from rank > 2 stay in the same group
+            for(int i=2; i<groupSize; i++) {
+                TransitionRule transitionRule = new TransitionRule();
+                transitionRule.setPosition(i);
+                transitionRule.setTargetGroup(sourceGroup); //next group
+                transitionRule.setSourceGroup(sourceGroup); //next group
+                trasitionRules.add(transitionRule);
+            }
+
+//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
 //
-//
-//            sourceGroup.setTransitionRules(transitionRules);
-//
-//            groupsRepository.save(sourceGroup);
-//        }
-//        else if(g.getName().equals("Grupa"+(playersInGroups.size()-1))){
-//            //last group
-//        }
-//        else {
-//            //other groups
-//        }
-//
-//
-//    }
+//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+//            transitionRuleLowerGroup.setPosition(groupSize);
+//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+//            trasitionRules.add(transitionRuleLowerGroup);
+
+            transitionrulesRepository.saveAll(trasitionRules);
+        }
+
+
+    }
 
     public void getPlayersByPhoneNr(){
         Player byPhoneNumber1 = playersRepository.findByPhoneNumber(837349531);

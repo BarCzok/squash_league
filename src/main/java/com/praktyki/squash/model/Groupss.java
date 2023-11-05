@@ -1,11 +1,13 @@
 package com.praktyki.squash.model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
+
+import static org.hibernate.annotations.CascadeType.ALL;
 
 
 @Entity
@@ -16,22 +18,11 @@ import java.util.Map;
     private int id;
     private int groupRank;
 
-    public int getGroupRank() {
-        return groupRank;
-    }
-
-    public void setGroupRank(int groupRank) {
-        this.groupRank = groupRank;
-    }
-
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "order_item_mapping",
-//            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")})
-//    @MapKey(name = "id")
-//    private Map<Integer, Groupss> transitionRules;
+    @Cascade(ALL)
+    @OneToMany(mappedBy = "sourceGroup")
+    private List<TransitionRule> transitionRules;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "groupp")
@@ -53,7 +44,20 @@ import java.util.Map;
         this.name = name;
     }
 
-    public void add(Groupss groupss) {
+    public int getGroupRank() {
+        return groupRank;
+    }
+
+    public void setGroupRank(int groupRank) {
+        this.groupRank = groupRank;
+    }
+
+    public List<TransitionRule> getTransitionRules() {
+        return transitionRules;
+    }
+
+    public void setTransitionRules(List<TransitionRule> transitionRules) {
+        this.transitionRules = transitionRules;
     }
 }
 

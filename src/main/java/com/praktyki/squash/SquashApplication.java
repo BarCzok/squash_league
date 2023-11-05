@@ -1,5 +1,6 @@
 package com.praktyki.squash;
 
+import com.praktyki.squash.model.Groupss;
 import com.praktyki.squash.repository.GroupssRepository;
 import com.praktyki.squash.repository.RoundRepository;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +31,11 @@ public class SquashApplication implements WebMvcConfigurer {
         testData.createScores();
         testData.getPlayersByPhoneNr();
 
-//        testData.createGroupTransitions(groupssRepository.findAll().iterator().next(), roundRepository.findAll().iterator().next().getId());
+        int roundId = roundRepository.findAll().iterator().next().getId();
+
+        for (Groupss groupss : groupssRepository.findAll()) {
+            testData.createGroupTransitions(groupss, roundId);
+
+        }
     }
 }
