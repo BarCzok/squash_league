@@ -2,12 +2,10 @@ package com.praktyki.squash.facades;
 
 import com.praktyki.squash.facades.dto.*;
 import com.praktyki.squash.model.*;
-import com.praktyki.squash.repository.GroupssRepository;
-import com.praktyki.squash.repository.RoundRepository;
-import com.praktyki.squash.repository.PlayersRepository;
+import com.praktyki.squash.repository.*;
 
-import com.praktyki.squash.repository.custom.CustomGamesRepository;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.util.*;
 
@@ -29,10 +27,12 @@ public class RoundFacade {
     PlayersRepository playersRepository;
 
     @Resource
-    CustomGamesRepository gamesRepository;
+    GameRepository gamesRepository;
 
     @Resource
     GroupssRepository groupssRepository;
+    @Resource
+    private HistoryRepository historyRepository;
 
 
     public Map<GroupDTO, List<PlayerDTO>> getPlayersInGroups(int roundId){
@@ -82,10 +82,10 @@ public class RoundFacade {
         for (GameDTO playersGame : playersGames) {
             ScoreDTO scoreDTO = null;
             if(playersGame.getPlayer1().getId()==playerId){
-                scoreDTO = playersGame.getScores().get(0);
+                scoreDTO = playersGame.getScores().isEmpty() ? new ScoreDTO() : playersGame.getScores().get(0);
             }
             if(playersGame.getPlayer2().getId()==playerId){
-                scoreDTO = playersGame.getScores().get(1);
+                scoreDTO = playersGame.getScores().isEmpty() ? new ScoreDTO() : playersGame.getScores().get(1);
             }
 
             totalPoints += scoreDTO.getTotalPoints();
@@ -158,5 +158,53 @@ public class RoundFacade {
     }
 
 
+    public void closeRound(Integer roundId) {
+        Round nextRound = new Round();
+        nextRound.setStartDate(null);
+        nextRound.setEndDate(null);
+        nextRound.setName("nowa runda");
+        roundRepository.save(nextRound);
 
+        Map<GroupDTO, List<PlayerDTO>> playersInGroups = getPlayersInGroups(roundId);
+
+        playersInGroups.forEach( (group, players ) -> {
+
+        players.forEach(player -> {
+            History h = new History();
+
+            h.setPlayer(playersRepository.findById(player.getId()).get());
+            h.setGroupp(groupssRepository.findById(player.getNextGroup().getId()).get());
+            h.setRound(nextRound);
+
+            historyRepository.save(h);
+        });
+
+        });
+
+        createGames(nextRound);
+    }
+
+    public List<Game> createGames(Round round) {
+        List<Game> games = new ArrayList<>();
+
+        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
+
+        for(Groupss group : playersInGroups.keySet()) {
+            List<Player> playersFromGroup = playersInGroups.get(group);
+            for (int i = 0; i < playersFromGroup.size(); i++) {
+                for (int j = 0; j < playersFromGroup.size(); j++) {
+                    if (i > j) {
+                        Game game = new Game();
+                        game.setPlayer1(playersFromGroup.get(i));
+                        game.setPlayer2(playersFromGroup.get(j));
+                        game.setRound(round);
+                        games.add(game);
+                    }
+                }
+            }
+        }
+        gamesRepository.saveAll(games);
+
+        return games;
+    }
 }

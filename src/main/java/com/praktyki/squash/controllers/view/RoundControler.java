@@ -5,9 +5,7 @@ import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
-import com.praktyki.squash.model.Round;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,15 +39,21 @@ public class RoundControler {
         return "rounds/view";
     }
 
-    @GetMapping(value = "/view/{roundId}")
-    public String home(ModelMap model, @PathVariable Integer roundId){
+//    @GetMapping(value = "/view/{roundId}")
+//    public String home(ModelMap model, @PathVariable Integer roundId){
+//
+//        Map<GroupDTO, List<GameDTO>> gamesForRound = roundFacade.getGamesForRound(roundId);
+//        Map<GroupDTO, List<PlayerDTO>> playersForRound = roundFacade.getPlayersInGroups(roundId);
+//        model.addAttribute("games", gamesForRound);
+//        model.addAttribute("players", playersForRound);
+//        RoundDTO roundDto = roundFacade.getRoundById(roundId);
+//        model.addAttribute("roundName", roundDto.getName());
+//        return "rounds/view";
+//    }
+    @GetMapping (value = "/xd/{roundId}")
+    public String xd(ModelMap model, @PathVariable Integer roundId){
+        roundFacade.closeRound(roundId);
 
-        Map<GroupDTO, List<GameDTO>> gamesForRound = roundFacade.getGamesForRound(roundId);
-        Map<GroupDTO, List<PlayerDTO>> playersForRound = roundFacade.getPlayersInGroups(roundId);
-        model.addAttribute("games", gamesForRound);
-        model.addAttribute("players", playersForRound);
-        RoundDTO roundDto = roundFacade.getRoundById(roundId);
-        model.addAttribute("roundName", roundDto.getName());
-        return "rounds/view";
+        return "redirect:/rounds/view";
     }
 }

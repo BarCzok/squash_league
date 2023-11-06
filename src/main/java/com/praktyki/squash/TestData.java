@@ -1,5 +1,7 @@
 package com.praktyki.squash;
 
+import com.praktyki.squash.facades.GameFacade;
+import com.praktyki.squash.facades.RoundFacade;
 import com.praktyki.squash.model.*;
 import com.praktyki.squash.repository.*;
 import org.springframework.stereotype.Component;
@@ -11,10 +13,10 @@ import java.util.*;
 public class TestData {
 
     int roundsCount = 1;
-    int groupsCount = 6;
-    int playersCount = 36;
+    int groupsCount = 3;
+    int playersCount = 9;
     private List<Player> players = new ArrayList<>();
-    private List<Game> games = new ArrayList<>();
+    private List<Game> games;
     private List<Round> rounds = new ArrayList<>();
     private List<Groupss> groups = new ArrayList<>();
     private List<History> histories = new ArrayList<>();
@@ -23,7 +25,7 @@ public class TestData {
     PlayersRepository playersRepository;
 
     @Resource
-    GameRepository gamesRepository;
+    RoundFacade roundFacade;
 
     @Resource
     ScoreRepository scoreRepository;
@@ -76,26 +78,6 @@ public class TestData {
         groupsRepository.saveAll(groups);
 }
 
-    public void createGames(Round round) {
-
-        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
-
-        for(Groupss group : playersInGroups.keySet()) {
-            List<Player> playersFromGroup = playersInGroups.get(group);
-            for (int i = 0; i < playersFromGroup.size(); i++) {
-                for (int j = 0; j < playersFromGroup.size(); j++) {
-                    if (i > j) {
-                        Game game = new Game();
-                        game.setPlayer1(playersFromGroup.get(i));
-                        game.setPlayer2(playersFromGroup.get(j));
-                        game.setRound(round);
-                        games.add(game);
-                    }
-                }
-            }
-        }
-        gamesRepository.saveAll(games);
-    }
 
     public void createScores() {
         for (Game game : games) {
@@ -130,7 +112,9 @@ public class TestData {
         }
     }
     public void createGames() {
-        rounds.forEach(this::createGames);
+        rounds.forEach( r-> {
+            games = roundFacade.createGames(r);
+        });
     }
 
     public void createGroupTransitions(Groupss sourceGroup, int roundId){
