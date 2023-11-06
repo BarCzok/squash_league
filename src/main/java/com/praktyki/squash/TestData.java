@@ -155,13 +155,13 @@ public class TestData {
 
             //last player degrades to lower group
             //TODO: create transition rule
-//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
-//            transitionRuleLowerGroup.setPosition(groupSize);
-//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
-//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleLowerGroup);
+            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
+
+            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+            transitionRuleLowerGroup.setPosition(groupSize);
+            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleLowerGroup);
 
             transitionrulesRepository.saveAll(trasitionRules);
         }
@@ -171,13 +171,13 @@ public class TestData {
 
             //only first player advances to the higher group
             //TODO: create transition rule
-//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
-//            transitionRuleHigherGroup.setPosition(1);
-//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
-//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleHigherGroup);
+            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
+
+            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+            transitionRuleHigherGroup.setPosition(1);
+            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleHigherGroup);
 
             //players from rank > 2 stay in the same group
             for(int i=2; i<=groupSize; i++) {
@@ -195,13 +195,13 @@ public class TestData {
             List<TransitionRule> trasitionRules = new ArrayList<>();
 
             //TODO: create transition rule
-//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
-//            transitionRuleHigherGroup.setPosition(1);
-//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
-//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleHigherGroup);
+            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
+
+            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+            transitionRuleHigherGroup.setPosition(1);
+            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleHigherGroup);
 
             //players from rank > 2 stay in the same group
             for(int i=2; i<groupSize; i++) {
@@ -212,13 +212,13 @@ public class TestData {
                 trasitionRules.add(transitionRule);
             }
 
-//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
-//            transitionRuleLowerGroup.setPosition(groupSize);
-//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
-//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleLowerGroup);
+            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
+
+            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+            transitionRuleLowerGroup.setPosition(groupSize);
+            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleLowerGroup);
 
             transitionrulesRepository.saveAll(trasitionRules);
         }
