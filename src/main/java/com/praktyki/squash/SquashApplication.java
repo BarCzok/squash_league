@@ -28,7 +28,7 @@ public class SquashApplication implements WebMvcConfigurer {
         testData.createHistories();
 
         testData.createGames();
-        testData.createScores();
+//        testData.createScores();
         testData.getPlayersByPhoneNr();
 
         int roundId = roundRepository.findAll().iterator().next().getId();

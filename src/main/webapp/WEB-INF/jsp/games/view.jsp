@@ -87,7 +87,7 @@
                     <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>
                     <td>${score1.pointsForPlaying}:${score2.pointsForPlaying}</td>
                     <td>${score1.totalPoints}:${score2.totalPoints}</td>
-                    <td><a href="/rounds/view/${game.round.id}">${game.round.name}</a></td>
+                    <td><a href="/rounds/${game.round.id}/view">${game.round.name}</a></td>
 
                 </tr>
         </c:forEach>
