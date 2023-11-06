@@ -1,10 +1,8 @@
 package com.praktyki.squash.facades;
 
 import com.praktyki.squash.facades.dto.*;
-import com.praktyki.squash.model.Game;
-import com.praktyki.squash.model.Groupss;
-import com.praktyki.squash.model.Player;
-import com.praktyki.squash.model.Round;
+import com.praktyki.squash.model.*;
+import com.praktyki.squash.repository.GroupssRepository;
 import com.praktyki.squash.repository.RoundRepository;
 import com.praktyki.squash.repository.PlayersRepository;
 
@@ -33,6 +31,9 @@ public class RoundFacade {
     @Resource
     CustomGamesRepository gamesRepository;
 
+    @Resource
+    GroupssRepository groupssRepository;
+
 
     public Map<GroupDTO, List<PlayerDTO>> getPlayersInGroups(int roundId){
         Map<Groupss, List<Player>> playersInGroupsSQL = playersRepository.getPlayersInGroups(roundId);
@@ -50,14 +51,30 @@ public class RoundFacade {
 
             playerDTOS.sort((p1, p2) -> p2.getTotalPoints() - p1.getTotalPoints());
 
+            List<TransitionRule> transitionRules = groupssRepository.getTransitionRules(group);
+
             int placeInGroup=1;
             for (PlayerDTO playerDTO : playerDTOS) {
-                playerDTO.setPlaceInGroup(placeInGroup++);
+                TransitionRule tr = getTransitionRuleForPlace(placeInGroup, transitionRules);
+                playerDTO.setNextGroup(groupFacade.convertGroupss(tr.getTargetGroup()));
+                playerDTO.setPlaceInGroup(placeInGroup);
+
+                placeInGroup++;
             }
 
             result.put(groupDTO, playerDTOS);
         });
      return result;
+    }
+
+    private TransitionRule getTransitionRuleForPlace(int placeInGroup, List<TransitionRule> transitionRules) {
+        for (TransitionRule transitionRule : transitionRules) {
+            if(transitionRule.getPosition() == placeInGroup){
+                return transitionRule;
+            }
+        }
+
+        throw new IllegalStateException("Trasition rule mising!");
     }
 
     public int getTotalPoints(List<GameDTO> playersGames, int playerId) {

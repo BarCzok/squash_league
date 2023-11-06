@@ -16,6 +16,7 @@
                             <td>Player</td>
                             <td>Group</td>
                             <td>Points</td>
+                            <td>Next group</td>
                             </thead>
 
                             <c:forEach var="player" items="${entry.value}">
@@ -24,6 +25,7 @@
                                     <td>${player.name}</td>
                                     <td>${group.name}</td>
                                     <td>${player.totalPoints}</td>
+                                    <td>${player.nextGroup.name}</td>
                                 </tr>
 
 

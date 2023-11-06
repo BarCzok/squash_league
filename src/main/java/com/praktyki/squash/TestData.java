@@ -11,8 +11,8 @@ import java.util.*;
 public class TestData {
 
     int roundsCount = 1;
-    int groupsCount = 3;
-    int playersCount = 9;
+    int groupsCount = 6;
+    int playersCount = 36;
     private List<Player> players = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
     private List<Round> rounds = new ArrayList<>();

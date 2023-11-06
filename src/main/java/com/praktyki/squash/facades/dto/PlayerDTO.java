@@ -7,6 +7,7 @@ public class PlayerDTO {
     int phoneNumber;
     String adress;
     private int totalPoints;
+    private GroupDTO nextGroup;
 
     public int getId() {
         return id;
@@ -66,5 +67,13 @@ public class PlayerDTO {
 
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public void setNextGroup(GroupDTO nextGroup) {
+        this.nextGroup = nextGroup;
+    }
+
+    public GroupDTO getNextGroup() {
+        return nextGroup;
     }
 }
