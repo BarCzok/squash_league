@@ -18,25 +18,29 @@
             margin: 8px 0;
             box-sizing: border-box;
             border: none;
-            background-color: #D6EEEE;
+            background-color:  #f2f2f2;
             color: #000000;
             width: 40%;
         }
 
-        button {
-            background-color: white;
-            color: #484545;
-            border: 2px solid #484545;
-            border-radius: 5px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition-duration: 0.4s;
+        button{
             display: inline-block;
+            outline: 0;
+            border: 0;
+            cursor: pointer;
+            border-radius: 8px;
+            padding: 8px 18px 10px;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1;
+            transition: transform 200ms,background 200ms;
+            background: transparent;
+            color: #484343;
+            box-shadow: 0 0 0 3px #484343 inset;
         }
 
-        button:hover {
-            background-color: #484545;
-            color: white;
+        button:hover{
+            transform: translateY(-2px);
         }
 
 

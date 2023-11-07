@@ -12,53 +12,18 @@
 <head>
     <link rel="stylesheet" href="../style.css" type="text/css">
     <title>Tabela Games</title>
-    <style>
-        a {
-            text-decoration: none;
-            color: black;
-        }
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 70%;
-
-        }
-
-        body{
-            /*font-family: Tahoma, sans-serif;*/
-            display: flex;
-            justify-content: center;
-        }
-
-        td, th {
-            border: 4px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        td:nth-child(even) {
-            background-color: #D6EEEE;
-        }
-
-
-        .div{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-    </style>
+    <style><%@include file="/WEB-INF/css/style.css"%></style>
 </head>
 
 <body>
 <div class =  "div">
    <center><h1>Games</h1></center>
-
+<center>
     <table>
         <colgroup>
             <col span="2" style="background-color: #D6EEEE">
         </colgroup>
-        <thead>
+        <tr>
         <td>Player1</td>
         <td>Player2</td>
         <td>Score</td>
@@ -67,7 +32,7 @@
         <td>PlayPoints</td>
         <td>TotalPoints</td>
         <td>Round</td>
-        </thead>
+        </tr>
         <c:forEach var="game" items="${games}">
 
                 <c:set var="score1" value="${game.scores[0]}"/>
@@ -93,7 +58,7 @@
                 </tr>
         </c:forEach>
     </table>
-
+    </center>
 </div>
 
 

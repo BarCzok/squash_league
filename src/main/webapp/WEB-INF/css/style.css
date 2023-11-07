@@ -39,7 +39,7 @@ outline: 0;
 border: 0;
 cursor: pointer;
 border-radius: 8px;
-padding: 14px 24px 16px;
+padding: 10px 20px 12px;
 font-size: 18px;
 font-weight: 700;
 line-height: 1;
@@ -51,4 +51,11 @@ box-shadow: 0 0 0 3px #484343 inset;
 
 button:hover{
     transform: translateY(-2px);
+}
+
+.player {
+    border: 1px solid red;
+}
+table tr:first-child {
+    font-weight: bold;
 }
