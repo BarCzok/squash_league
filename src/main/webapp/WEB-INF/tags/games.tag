@@ -8,11 +8,12 @@
 <c:forEach var="entry" items="${games.entrySet()}">
         <c:set var="group" value="${entry.key}"/>
             <center><h1>Games/${roundName}/${group.name}</h1></center>
-            <table>
+            <center><table>
                 <colgroup>
                     <col span="2" style="background-color: #D6EEEE">
                 </colgroup>
-                <thead>
+
+                <tr class="header">
                 <td>Player1</td>
                 <td>Player2</td>
                 <td>Score</td>
@@ -20,7 +21,7 @@
                 <td>WinPoints</td>
                 <td>PlayPoints</td>
                 <td>TotalPoints</td>
-                </thead>
+                </tr>
 
 
                 <c:forEach var="game" items="${entry.value}">
@@ -46,6 +47,6 @@
 
 
             </c:forEach>
-            </table>
+            </table></center>
         <br><br>
     </c:forEach>
