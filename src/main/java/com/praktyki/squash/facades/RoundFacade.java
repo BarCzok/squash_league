@@ -1,15 +1,11 @@
 package com.praktyki.squash.facades;
 
 import com.praktyki.squash.facades.dto.*;
-import com.praktyki.squash.model.Game;
-import com.praktyki.squash.model.Groupss;
-import com.praktyki.squash.model.Player;
-import com.praktyki.squash.model.Round;
-import com.praktyki.squash.repository.RoundRepository;
-import com.praktyki.squash.repository.PlayersRepository;
+import com.praktyki.squash.model.*;
+import com.praktyki.squash.repository.*;
 
-import com.praktyki.squash.repository.custom.CustomGamesRepository;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.util.*;
 
@@ -31,7 +27,12 @@ public class RoundFacade {
     PlayersRepository playersRepository;
 
     @Resource
-    CustomGamesRepository gamesRepository;
+    GameRepository gamesRepository;
+
+    @Resource
+    GroupssRepository groupssRepository;
+    @Resource
+    private HistoryRepository historyRepository;
 
 
     public Map<GroupDTO, List<PlayerDTO>> getPlayersInGroups(int roundId){
@@ -50,9 +51,15 @@ public class RoundFacade {
 
             playerDTOS.sort((p1, p2) -> p2.getTotalPoints() - p1.getTotalPoints());
 
+            List<TransitionRule> transitionRules = groupssRepository.getTransitionRules(group);
+
             int placeInGroup=1;
             for (PlayerDTO playerDTO : playerDTOS) {
-                playerDTO.setPlaceInGroup(placeInGroup++);
+                TransitionRule tr = getTransitionRuleForPlace(placeInGroup, transitionRules);
+                playerDTO.setNextGroup(groupFacade.convertGroupss(tr.getTargetGroup()));
+                playerDTO.setPlaceInGroup(placeInGroup);
+
+                placeInGroup++;
             }
 
             result.put(groupDTO, playerDTOS);
@@ -60,15 +67,25 @@ public class RoundFacade {
      return result;
     }
 
+    private TransitionRule getTransitionRuleForPlace(int placeInGroup, List<TransitionRule> transitionRules) {
+        for (TransitionRule transitionRule : transitionRules) {
+            if(transitionRule.getPosition() == placeInGroup){
+                return transitionRule;
+            }
+        }
+
+        throw new IllegalStateException("Trasition rule mising!");
+    }
+
     public int getTotalPoints(List<GameDTO> playersGames, int playerId) {
         int totalPoints = 0;
         for (GameDTO playersGame : playersGames) {
             ScoreDTO scoreDTO = null;
             if(playersGame.getPlayer1().getId()==playerId){
-                scoreDTO = playersGame.getScores().get(0);
+                scoreDTO = playersGame.getScores().isEmpty() ? new ScoreDTO() : playersGame.getScores().get(0);
             }
             if(playersGame.getPlayer2().getId()==playerId){
-                scoreDTO = playersGame.getScores().get(1);
+                scoreDTO = playersGame.getScores().isEmpty() ? new ScoreDTO() : playersGame.getScores().get(1);
             }
 
             totalPoints += scoreDTO.getTotalPoints();
@@ -141,5 +158,53 @@ public class RoundFacade {
     }
 
 
+    public void closeRound(Integer roundId) {
+        Round nextRound = new Round();
+        nextRound.setStartDate(null);
+        nextRound.setEndDate(null);
+        nextRound.setName("nowa runda");
+        roundRepository.save(nextRound);
 
+        Map<GroupDTO, List<PlayerDTO>> playersInGroups = getPlayersInGroups(roundId);
+
+        playersInGroups.forEach( (group, players ) -> {
+
+        players.forEach(player -> {
+            History h = new History();
+
+            h.setPlayer(playersRepository.findById(player.getId()).get());
+            h.setGroupp(groupssRepository.findById(player.getNextGroup().getId()).get());
+            h.setRound(nextRound);
+
+            historyRepository.save(h);
+        });
+
+        });
+
+        createGames(nextRound);
+    }
+
+    public List<Game> createGames(Round round) {
+        List<Game> games = new ArrayList<>();
+
+        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
+
+        for(Groupss group : playersInGroups.keySet()) {
+            List<Player> playersFromGroup = playersInGroups.get(group);
+            for (int i = 0; i < playersFromGroup.size(); i++) {
+                for (int j = 0; j < playersFromGroup.size(); j++) {
+                    if (i > j) {
+                        Game game = new Game();
+                        game.setPlayer1(playersFromGroup.get(i));
+                        game.setPlayer2(playersFromGroup.get(j));
+                        game.setRound(round);
+                        games.add(game);
+                    }
+                }
+            }
+        }
+        gamesRepository.saveAll(games);
+
+        return games;
+    }
 }

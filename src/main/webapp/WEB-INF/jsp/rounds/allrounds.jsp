@@ -19,10 +19,9 @@
             color: black;
         }
         table {
-            font-family: arial, sans-serif;
+            font-family: Tahoma, sans-serif;
             border-collapse: collapse;
             width: 70%;
-
         }
 
         body{
@@ -49,6 +48,22 @@
             flex-direction: column;
             justify-content: center;
         }
+        button {
+            background-color: white;
+            color: #484545;
+            border: 2px solid #484545;
+            border-radius: 5px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            display: inline-block;
+            width: 50px;
+        }
+
+        button:hover {
+            background-color: #484545;
+            color: white;
+        }
 
     </style>
 </head>
@@ -58,11 +73,11 @@
         <colgroup>
             <col span="1" style="background-color: white">
         </colgroup>
-        <thead>
-            <td>RoundName</td>
-            <td>StartDate</td>
-            <td>EndDate</td>
-        </thead>
+
+            <th>RoundName</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+
 
         <c:forEach var="round" items="${rounds}">
             <tr>

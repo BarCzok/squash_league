@@ -1,5 +1,7 @@
 package com.praktyki.squash;
 
+import com.praktyki.squash.facades.GameFacade;
+import com.praktyki.squash.facades.RoundFacade;
 import com.praktyki.squash.model.*;
 import com.praktyki.squash.repository.*;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,7 @@ public class TestData {
     int groupsCount = 3;
     int playersCount = 9;
     private List<Player> players = new ArrayList<>();
-    private List<Game> games = new ArrayList<>();
+    private List<Game> games;
     private List<Round> rounds = new ArrayList<>();
     private List<Groupss> groups = new ArrayList<>();
     private List<History> histories = new ArrayList<>();
@@ -23,7 +25,7 @@ public class TestData {
     PlayersRepository playersRepository;
 
     @Resource
-    GameRepository gamesRepository;
+    RoundFacade roundFacade;
 
     @Resource
     ScoreRepository scoreRepository;
@@ -76,46 +78,26 @@ public class TestData {
         groupsRepository.saveAll(groups);
 }
 
-    public void createGames(Round round) {
 
-        Map<Groupss, List<Player>> playersInGroups = playersRepository.getPlayersInGroups(round.getId());
-
-        for(Groupss group : playersInGroups.keySet()) {
-            List<Player> playersFromGroup = playersInGroups.get(group);
-            for (int i = 0; i < playersFromGroup.size(); i++) {
-                for (int j = 0; j < playersFromGroup.size(); j++) {
-                    if (i > j) {
-                        Game game = new Game();
-                        game.setPlayer1(playersFromGroup.get(i));
-                        game.setPlayer2(playersFromGroup.get(j));
-                        game.setRound(round);
-                        games.add(game);
-                    }
-                }
-            }
-        }
-        gamesRepository.saveAll(games);
-    }
-
-    public void createScores() {
-        for (Game game : games) {
-
-            Random r = new Random();
-            int player1Sets = r.nextInt(5);
-
-            Score player1Score = new Score();
-            player1Score.setSets(player1Sets);
-            player1Score.setGame(game);
-            player1Score.setPlayer(game.getPlayer1());
-            scoreRepository.save(player1Score);
-
-            Score player2Score = new Score();
-            player2Score.setSets(5-player1Sets);
-            player2Score.setGame(game);
-            player2Score.setPlayer(game.getPlayer2());
-            scoreRepository.save(player2Score);
-        }
-    }
+//    public void createScores() {
+//        for (Game game : games) {
+//
+//            Random r = new Random();
+//            int player1Sets = r.nextInt(5);
+//
+//            Score player1Score = new Score();
+//            player1Score.setSets(player1Sets);
+//            player1Score.setGame(game);
+//            player1Score.setPlayer(game.getPlayer1());
+//            scoreRepository.save(player1Score);
+//
+//            Score player2Score = new Score();
+//            player2Score.setSets(5-player1Sets);
+//            player2Score.setGame(game);
+//            player2Score.setPlayer(game.getPlayer2());
+//            scoreRepository.save(player2Score);
+//        }
+//    }
     public void createHistories() {
         int g = 0;
         int r = 0;
@@ -130,7 +112,9 @@ public class TestData {
         }
     }
     public void createGames() {
-        rounds.forEach(this::createGames);
+        rounds.forEach( r-> {
+            games = roundFacade.createGames(r);
+        });
     }
 
     public void createGroupTransitions(Groupss sourceGroup, int roundId){
@@ -155,13 +139,13 @@ public class TestData {
 
             //last player degrades to lower group
             //TODO: create transition rule
-//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
-//            transitionRuleLowerGroup.setPosition(groupSize);
-//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
-//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleLowerGroup);
+            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
+
+            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+            transitionRuleLowerGroup.setPosition(groupSize);
+            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleLowerGroup);
 
             transitionrulesRepository.saveAll(trasitionRules);
         }
@@ -171,13 +155,13 @@ public class TestData {
 
             //only first player advances to the higher group
             //TODO: create transition rule
-//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
-//            transitionRuleHigherGroup.setPosition(1);
-//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
-//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleHigherGroup);
+            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
+
+            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+            transitionRuleHigherGroup.setPosition(1);
+            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleHigherGroup);
 
             //players from rank > 2 stay in the same group
             for(int i=2; i<=groupSize; i++) {
@@ -195,13 +179,13 @@ public class TestData {
             List<TransitionRule> trasitionRules = new ArrayList<>();
 
             //TODO: create transition rule
-//            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleHigherGroup = new TransitionRule();
-//            transitionRuleHigherGroup.setPosition(1);
-//            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
-//            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleHigherGroup);
+            Groupss higherGroup = groupsRepository.getHigherGroup(sourceGroup);
+
+            TransitionRule transitionRuleHigherGroup = new TransitionRule();
+            transitionRuleHigherGroup.setPosition(1);
+            transitionRuleHigherGroup.setTargetGroup(higherGroup); //next group
+            transitionRuleHigherGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleHigherGroup);
 
             //players from rank > 2 stay in the same group
             for(int i=2; i<groupSize; i++) {
@@ -212,13 +196,13 @@ public class TestData {
                 trasitionRules.add(transitionRule);
             }
 
-//            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
-//
-//            TransitionRule transitionRuleLowerGroup = new TransitionRule();
-//            transitionRuleLowerGroup.setPosition(groupSize);
-//            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
-//            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
-//            trasitionRules.add(transitionRuleLowerGroup);
+            Groupss lowerGroup = groupsRepository.getLowerGroup(sourceGroup);
+
+            TransitionRule transitionRuleLowerGroup = new TransitionRule();
+            transitionRuleLowerGroup.setPosition(groupSize);
+            transitionRuleLowerGroup.setTargetGroup(lowerGroup); //next group
+            transitionRuleLowerGroup.setSourceGroup(sourceGroup); //next group
+            trasitionRules.add(transitionRuleLowerGroup);
 
             transitionrulesRepository.saveAll(trasitionRules);
         }
