@@ -10,6 +10,7 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="../style.css" type="text/css">
     <title>Tabela Games</title>
     <style>
         a {
@@ -24,7 +25,7 @@
         }
 
         body{
-            font-family: Tahoma, sans-serif;
+            /*font-family: Tahoma, sans-serif;*/
             display: flex;
             justify-content: center;
         }
