@@ -44,6 +44,16 @@ public class PlayerFacade {
 
         return playerDto;
     }
+    public Player reverseConvertPlayer(PlayerDTO playerDto){
+        Player player = new Player();
 
-
+        player.setId(playerDto.getId());
+        player.setName(playerDto.getName());
+        player.setAdress(playerDto.getAdress());
+        return player;
+    }
+    public void savePlayer(PlayerDTO playerDto){
+        Player player = reverseConvertPlayer(playerDto);
+        playersRepository.save(player);
+    }
 }
