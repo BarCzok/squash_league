@@ -48,7 +48,4 @@ public class ScoreFacade {
 
         return scoreDto;
     }
-
-
-
 }

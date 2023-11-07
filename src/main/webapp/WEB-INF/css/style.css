@@ -54,8 +54,10 @@ button:hover{
 }
 
 .player {
-    border: 1px solid red;
+    font-weight: bold;
+    width: 40%;
 }
+
 table tr:first-child {
     font-weight: bold;
 }

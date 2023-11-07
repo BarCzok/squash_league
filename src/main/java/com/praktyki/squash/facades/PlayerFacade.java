@@ -15,7 +15,7 @@ public class PlayerFacade {
     @Resource
     private PlayersRepository playersRepository;
 
-    public PlayerDTO getPlayer(int playerId){
+    public static PlayerDTO getPlayer(int playerId){
 
         return convertPlayer(playersRepository.findById(playerId).get());
     }
