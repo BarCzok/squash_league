@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 
-public interface PlayersRepository extends CrudRepository<Player, Integer>, CustomPlayersRepository {
+public interface PlayersRepository extends CrudRepository<Player, Integer>, CustomPlayersRepository{
 }

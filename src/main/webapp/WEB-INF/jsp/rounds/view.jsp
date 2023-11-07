@@ -53,6 +53,22 @@
             flex-direction: column;
             justify-content: center;
         }
+        button {
+            background-color: white;
+            color: #484545;
+            border: 2px solid #484545;
+            border-radius: 5px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            display: inline-block;
+            width: 50px;
+        }
+
+        button:hover {
+            background-color: #484545;
+            color: white;
+        }
 
     </style>
 </head>
@@ -65,8 +81,9 @@
 
     <tags:playerRanking/>
 
-</div>
 
+    <button><a href="/rounds/xd/${roundId}">Zakoncz runde</a></button>
+</div>
 
 
 </body>

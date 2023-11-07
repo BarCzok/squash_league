@@ -79,25 +79,25 @@ public class TestData {
 }
 
 
-    public void createScores() {
-        for (Game game : games) {
-
-            Random r = new Random();
-            int player1Sets = r.nextInt(5);
-
-            Score player1Score = new Score();
-            player1Score.setSets(player1Sets);
-            player1Score.setGame(game);
-            player1Score.setPlayer(game.getPlayer1());
-            scoreRepository.save(player1Score);
-
-            Score player2Score = new Score();
-            player2Score.setSets(5-player1Sets);
-            player2Score.setGame(game);
-            player2Score.setPlayer(game.getPlayer2());
-            scoreRepository.save(player2Score);
-        }
-    }
+//    public void createScores() {
+//        for (Game game : games) {
+//
+//            Random r = new Random();
+//            int player1Sets = r.nextInt(5);
+//
+//            Score player1Score = new Score();
+//            player1Score.setSets(player1Sets);
+//            player1Score.setGame(game);
+//            player1Score.setPlayer(game.getPlayer1());
+//            scoreRepository.save(player1Score);
+//
+//            Score player2Score = new Score();
+//            player2Score.setSets(5-player1Sets);
+//            player2Score.setGame(game);
+//            player2Score.setPlayer(game.getPlayer2());
+//            scoreRepository.save(player2Score);
+//        }
+//    }
     public void createHistories() {
         int g = 0;
         int r = 0;

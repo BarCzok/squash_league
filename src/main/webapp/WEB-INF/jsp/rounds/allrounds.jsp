@@ -29,7 +29,7 @@
             font-family: Tahoma, sans-serif;
             display: flex;
             justify-content: center;
-            height: 1500px;
+            height: 500px;
         }
 
         td, th {

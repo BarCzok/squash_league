@@ -2,6 +2,7 @@ package com.praktyki.squash.controllers.view;
 
 import com.praktyki.squash.controllers.forms.ScoreForm;
 import com.praktyki.squash.facades.GameFacade;
+import com.praktyki.squash.facades.RoundFacade;
 import com.praktyki.squash.facades.ScoreFacade;
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.model.Score;
@@ -20,6 +21,9 @@ public class ScoreController {
 
     @Resource
     GameFacade gameFacade;
+
+    @Resource
+    RoundFacade roundFacade;
 
     @Resource
     ScoreFacade scoreFacade;
@@ -69,6 +73,6 @@ public class ScoreController {
         player2Score.setGame(gameRepository.findById(scoreForm.getGameId()).get());
         scoreRepository.save(player2Score);
 
-        return "redirect:/games/view";
+        return "redirect:/rounds/"+ player1Score.getGame().getRound().getId() +"/view";
     }
 }

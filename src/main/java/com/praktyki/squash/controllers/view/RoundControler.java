@@ -38,18 +38,6 @@ public class RoundControler {
         model.addAttribute("roundName", roundDto.getName());
         return "rounds/view";
     }
-
-//    @GetMapping(value = "/view/{roundId}")
-//    public String home(ModelMap model, @PathVariable Integer roundId){
-//
-//        Map<GroupDTO, List<GameDTO>> gamesForRound = roundFacade.getGamesForRound(roundId);
-//        Map<GroupDTO, List<PlayerDTO>> playersForRound = roundFacade.getPlayersInGroups(roundId);
-//        model.addAttribute("games", gamesForRound);
-//        model.addAttribute("players", playersForRound);
-//        RoundDTO roundDto = roundFacade.getRoundById(roundId);
-//        model.addAttribute("roundName", roundDto.getName());
-//        return "rounds/view";
-//    }
     @GetMapping (value = "/xd/{roundId}")
     public String xd(ModelMap model, @PathVariable Integer roundId){
         roundFacade.closeRound(roundId);
