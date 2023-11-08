@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		security
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/login").permitAll() //login page is always open
+			.antMatchers("/login", "/home").permitAll() //login page is always open
 			.anyRequest().fullyAuthenticated()
 			.and()
 			.formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/rounds/view", true)

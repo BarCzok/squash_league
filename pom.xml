@@ -21,6 +21,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>squash</name>
     <description>Liga squasha</description>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -138,6 +139,7 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
