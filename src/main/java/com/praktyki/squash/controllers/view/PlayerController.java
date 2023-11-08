@@ -5,11 +5,12 @@ import com.praktyki.squash.controllers.forms.ScoreForm;
 import com.praktyki.squash.facades.PlayerFacade;
 import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.PlayerDTO;
+import com.praktyki.squash.model.Player;
+import com.praktyki.squash.model.Score;
+import com.praktyki.squash.repository.PlayersRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,9 @@ public class PlayerController {
     @Resource
     PlayerFacade playerFacade;
 
+    @Resource
+    PlayersRepository playersRepository;
+
     @GetMapping(value = "/{playerId}")
     public String home(@PathVariable Integer playerId, ModelMap model){
         PlayerDTO playerDto = playerFacade.getPlayer(playerId);
@@ -28,19 +32,25 @@ public class PlayerController {
 
         return "players/playerDetails";
     }
-    @GetMapping(value = "/addPlayer")
-    public String score(@PathVariable Integer playerId, ModelMap model){
-        PlayerDTO playerDto = new PlayerDTO();
 
-        PlayerForm playerForm = new PlayerForm();
-        playerForm.setId(playerDto.getId());
-        playerForm.setName(playerDto.getName());
-        playerForm.setAdress(playerDto.getAdress());
-        playerForm.setPhoneNumber(playerDto.getPhoneNumber());
+    @GetMapping(value ="/newPlayer")
+    public String home(ModelMap model){
 
+        PlayerForm playerform = new PlayerForm();
+        model.addAttribute("player", playerform);
 
-        model.addAttribute("player",playerForm );
+        return "players/addPlayer";
+    }
 
-        return "scores/addScore";
+    @PostMapping(value = "/addPlayer")
+    public String addPlayer(@ModelAttribute PlayerForm playerForm, ModelMap model){
+
+        Player player = new Player();
+        player.setName(playerForm.getName());
+        player.setAdress(playerForm.getAdress());
+        player.setPhoneNumber(playerForm.getPhoneNumber());
+        playersRepository.save(player);
+
+        return "redirect:/rounds/view";
     }
 }
