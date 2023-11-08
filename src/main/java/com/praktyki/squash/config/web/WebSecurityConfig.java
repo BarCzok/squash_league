@@ -26,23 +26,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails admin =
-				User.withDefaultPasswordEncoder()
-						.username("admin")
-						.password("admin")
-						.roles("USER", "ADMIN")
-						.build();
-
-		UserDetails user =
-				User.withDefaultPasswordEncoder()
-						.username("user")
-						.password("user")
-						.roles("USER")
-						.build();
-
-		return new InMemoryUserDetailsManager(admin, user);
-	}
+//	@Bean
+//	@Override
+//	public UserDetailsService userDetailsService() {
+//		UserDetails admin =
+//				User.withDefaultPasswordEncoder()
+//						.username("admin")
+//						.password("admin")
+//						.roles("USER", "ADMIN")
+//						.build();
+//
+//		UserDetails user =
+//				User.withDefaultPasswordEncoder()
+//						.username("user")
+//						.password("user")
+//						.roles("USER")
+//						.build();
+//
+//		return new InMemoryUserDetailsManager(admin, user);
+//	}
 }
