@@ -59,9 +59,15 @@
     <c:if test="${not empty errorMsg}">
         <b style="color:#FF0000">${errorMsg}</b>
     </c:if><br/>
+    <c:if test="${not empty haker}">
+        <b style="color:#FF0000">${haker}</b>
+    </c:if><br/>
+
     <form:button>Add score</form:button>
     <form:input type="hidden" path="player1Id"/><br/>
     <form:input type="hidden" path="player2Id"/><br/>
+    <form:input type="hidden" path="player1Name"/><br/>
+    <form:input type="hidden" path="player2Name"/><br/>
     <form:input type="hidden" path="gameId"/><br/>
 </form:form>
 

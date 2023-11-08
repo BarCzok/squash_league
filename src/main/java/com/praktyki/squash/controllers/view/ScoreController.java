@@ -9,6 +9,9 @@ import com.praktyki.squash.model.Score;
 import com.praktyki.squash.repository.GameRepository;
 import com.praktyki.squash.repository.PlayersRepository;
 import com.praktyki.squash.repository.ScoreRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +47,12 @@ public class ScoreController {
         ScoreForm scoreForm = new ScoreForm();
         scoreForm.setPlayer1Id(gameDto.getPlayer1().getId());
         scoreForm.setPlayer2Id(gameDto.getPlayer2().getId());
+
+        scoreForm.setPlayer1Name(gameDto.getPlayer1().getName());
+        scoreForm.setPlayer2Name(gameDto.getPlayer2().getName());
+
         scoreForm.setGameId(gameDto.getId());
+
 
         model.addAttribute("score",scoreForm );
 
@@ -52,6 +60,8 @@ public class ScoreController {
     }
     @PostMapping(value = "/addScore")
     public String addScore(@ModelAttribute ScoreForm scoreForm, ModelMap model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User principal = (User) auth.getPrincipal();
 
         if(scoreForm.getPoints1() + scoreForm.getPoints2() != 5){
             model.addAttribute("score",scoreForm );
@@ -59,6 +69,14 @@ public class ScoreController {
 
             return "scores/addScore";
         }
+        if(scoreForm.getPlayer1Name() != principal.getUsername() ||
+                scoreForm.getPlayer2Name() != principal.getUsername()){
+            model.addAttribute("score",scoreForm );
+            model.addAttribute("haker","NIE TWOJ MECZ bratku" );
+
+            return "scores/addScore";
+        }
+
 
         Score player1Score = new Score();
         player1Score.setSets(scoreForm.getPoints1());
