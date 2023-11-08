@@ -42,8 +42,6 @@
         button:hover{
             transform: translateY(-2px);
         }
-
-
     </style>
 
 </head>
@@ -51,20 +49,15 @@
 <center>
     <h1>Add Player</h1><br/>
 
-    <form:form action="/player/addPlayer" method="post" modelAttribute="player">
+    <form:form action="/players/addPlayer" method="post" modelAttribute="player">
         <form:label path="name">Player name:</form:label><br/>
         <form:input path="name"/><br/>
-        <form:label path="adess">Player adress:</form:label><br/>
+        <form:label path="adress">Player adress:</form:label><br/>
         <form:input path="adress"/><br/>
         <form:label path="phoneNumber">Player phone number:</form:label><br/>
-    <form:input path="phoneNumber"/><br/>
-        <c:if test="${not empty errorMsg}">
-            <b style="color:#FF0000">${errorMsg}</b>
-        </c:if><br/>
-        <form:button>Add score</form:button>
-        <form:input type="hidden" path="playerId"/><br/>
+        <form:input path="phoneNumber"/><br/>
+        <form:button>Add player</form:button>
     </form:form>
-
 </center>
 
 
