@@ -21,7 +21,7 @@ public class DataBaseUserDetailsService implements UserDetailsService {
     PlayersRepository playersRepository;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Player player = playersRepository.findById(112221).get();
+        Player player = playersRepository.findByName(username);
 
         if(player != null) {
             return User.withDefaultPasswordEncoder()

@@ -36,6 +36,7 @@ public class RoundControler {
         model.addAttribute("players", playersForRound);
         RoundDTO roundDto = roundFacade.getRoundById(roundId);
         model.addAttribute("roundName", roundDto.getName());
+        model.addAttribute("user", "Player0");
         return "rounds/view";
     }
     @GetMapping (value = "/xd/{roundId}")

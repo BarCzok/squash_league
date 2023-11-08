@@ -47,4 +47,11 @@ public class CustomPlayersRepositoryImpl implements CustomPlayersRepository {
         return (Player) query.getSingleResult();
     }
 
+    @Override
+    public Player findByName(String name){
+        Query query = entityManager.createQuery("select p from Player as p where p.name = :name");
+        query.setParameter("name", name);
+        return(Player) query.getSingleResult();
+    }
+
 }
