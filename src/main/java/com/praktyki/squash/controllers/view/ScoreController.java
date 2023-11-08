@@ -44,7 +44,6 @@ public class ScoreController {
         ScoreForm scoreForm = new ScoreForm();
         scoreForm.setPlayer1Id(gameDto.getPlayer1().getId());
         scoreForm.setPlayer2Id(gameDto.getPlayer2().getId());
-
         scoreForm.setGameId(gameDto.getId());
 
         model.addAttribute("score",scoreForm );
