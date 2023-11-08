@@ -11,4 +11,5 @@ public interface CustomPlayersRepository {
     Map<Groupss, List<Player>> getPlayersInGroups(int roundId);
 
     Player findByPhoneNumber(int phoneNumber);
+    Player findByName(String name);
 }

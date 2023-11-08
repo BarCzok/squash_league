@@ -23,7 +23,8 @@
     <tags:playerRanking/>
 
 
-    <center><button><a href="/rounds/xd/${roundId}">Zakoncz runde</a></button></center>
+    <center><button><a href="/rounds/xd/${roundId}">Zakoncz runde</a></button>
+    <button><a href="/players/newPlayer">Dodaj Gracza</a></button></center>
 </div>
 </body>
 </html>

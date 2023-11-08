@@ -12,30 +12,35 @@
 </head>
 <body>
 <center>
+
     <div id="rounds">
         <h1>Rounds</h1>
-    <table class="currentRound">
-        <colgroup>
-            <col span="1" style="background-color: white">
-        </colgroup>
 
-        <th>RoundName</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
+        <table class="currentRound">
+            <colgroup>
+                <col span="1" style="background-color: white">
+            </colgroup>
+
+            <th>RoundName</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
 
 
-        <c:forEach var="round" items="${rounds}">
-            <tr>
-                <td><a href="${round.id}/view">${round.name}</a></td>
-                <td>${round.startDate}</td>
-                <td>${round.endDate}</td>
-            </tr>
-        </c:forEach>
-    </table>
+            <c:forEach var="round" items="${rounds}">
+                <tr>
+                    <td><a href="${round.id}/view">${round.name}</a></td>
+                    <td>${round.startDate}</td>
+                    <td>${round.endDate}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
     </div>
 </center>
 
 
 
+
 </body>
 </html>
+

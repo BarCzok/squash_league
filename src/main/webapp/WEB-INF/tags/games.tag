@@ -5,8 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="forms" uri="http://www.springframework.org/tags/form" %>
 
+
+
+
 <c:forEach var="entry" items="${games.entrySet()}">
         <c:set var="group" value="${entry.key}"/>
+
             <center><h1>Games/${roundName}/${group.name}</h1></center>
             <center><table>
                 <colgroup>
@@ -24,6 +28,7 @@
                 </tr>
 
 
+
                 <c:forEach var="game" items="${entry.value}">
                 <c:set var="score1" value="${game.scores[0]}"/>
                 <c:set var="score2" value="${game.scores[1]}"/>
@@ -32,12 +37,20 @@
                     <td><a href="/players/${game.player1.id}">${game.player1.name}</a></td>
                     <td><a href="/players/${game.player2.id}">${game.player2.name}</a></td>
                     <td>
+
+
+
+
                         <c:if test="${game.scores.size() ne 0}">
                             ${score1.sets}:${score2.sets}
                         </c:if>
                         <c:if test="${game.scores.size() eq 0}">
-                            <a href="/scores/score/${game.id}">Podaj</a>
+                            <c:if test="${(user eq game.player1.name) or (user eq game.player2.name) }">
+                                <a href="/scores/score/${game.id}">Podaj</a>
+                            </c:if>
                         </c:if>
+
+
                     </td>
                     <td>${score1.pointsForSets}:${score2.pointsForSets}</td>
                     <td>${score1.pointsForWinning}:${score2.pointsForWinning}</td>

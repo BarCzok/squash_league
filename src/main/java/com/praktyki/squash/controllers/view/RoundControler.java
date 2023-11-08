@@ -5,6 +5,9 @@ import com.praktyki.squash.facades.dto.GameDTO;
 import com.praktyki.squash.facades.dto.GroupDTO;
 import com.praktyki.squash.facades.dto.PlayerDTO;
 import com.praktyki.squash.facades.dto.RoundDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +39,12 @@ public class RoundControler {
         model.addAttribute("players", playersForRound);
         RoundDTO roundDto = roundFacade.getRoundById(roundId);
         model.addAttribute("roundName", roundDto.getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User principal = (User) auth.getPrincipal();
+
+        model.addAttribute("user", principal.getUsername());
+
         return "rounds/view";
     }
     @GetMapping (value = "/xd/{roundId}")
