@@ -60,15 +60,15 @@ public class ScoreController {
     }
     @PostMapping(value = "/addScore")
     public String addScore(@ModelAttribute ScoreForm scoreForm, ModelMap model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User principal = (User) auth.getPrincipal();
-
         if(scoreForm.getPoints1() + scoreForm.getPoints2() != 5){
             model.addAttribute("score",scoreForm );
             model.addAttribute("errorMsg","Incorrect data" );
 
             return "scores/addScore";
         }
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User principal = (User) auth.getPrincipal();
         if(scoreForm.getPlayer1Name() != principal.getUsername() ||
                 scoreForm.getPlayer2Name() != principal.getUsername()){
             model.addAttribute("score",scoreForm );
