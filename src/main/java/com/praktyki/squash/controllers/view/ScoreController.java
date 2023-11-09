@@ -67,15 +67,15 @@ public class ScoreController {
             return "scores/addScore";
         }
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User principal = (User) auth.getPrincipal();
-        if(scoreForm.getPlayer1Name() != principal.getUsername() ||
-                scoreForm.getPlayer2Name() != principal.getUsername()){
-            model.addAttribute("score",scoreForm );
-            model.addAttribute("haker","NIE TWOJ MECZ bratku" );
-
-            return "scores/addScore";
-        }
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User principal = (User) auth.getPrincipal();
+//        if(scoreForm.getPlayer1Name() != principal.getUsername() ||
+//                scoreForm.getPlayer2Name() != principal.getUsername()){
+//            model.addAttribute("score",scoreForm );
+//            model.addAttribute("haker","NIE TWOJ MECZ bratku" );
+//
+//            return "scores/addScore";
+//        }
 
 
         Score player1Score = new Score();

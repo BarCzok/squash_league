@@ -32,7 +32,7 @@ public class ScoreControllerTest {
     }
 
     @Test
-    public void ensureThatUserIsNotAllowedToSubmitGameResultsWhereSetNUbersAreNegative(){
+    public void ensureThatUserIsNotAllowedToSubmitGameResultsWhereSetNumbersAreNegative(){
         ScoreController scoreController = new ScoreController();
 
         ScoreForm scoreForm = new ScoreForm();
